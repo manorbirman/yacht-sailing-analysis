@@ -645,74 +645,52 @@
 <!-- PAGE: Data Providers -->
 <div class="page" id="providers">
   <div class="page-header">
-    <h2>&#128225; Data Providers</h2>
-    <div class="teal-tldr">TL;DR &mdash; 3 potential sources: OBS_Sailing (exists in WSC, unknown AC coverage), DSG Sailing API (comprehensive, covers some events), official AC live data (richest but requires access agreement). None are connected today.</div>
-    <p>Assessment of available data providers for Yacht Sailing ingestion</p>
-  </div>
-
-  <div class="card">
-    <h3>Provider Landscape</h3>
-    <table>
-      <tr><th>Provider</th><th>Coverage</th><th>Protocol</th><th>Status</th><th>WSC Readiness</th></tr>
-      <tr>
-        <td><strong>OBS (Olympic Broadcasting Services) &mdash; Sailing</strong></td>
-        <td>Olympic Sailing, potentially World Sailing events</td>
-        <td>OBS proprietary feed</td>
-        <td><span class="badge badge-orange">Configured, not connected to AC</span></td>
-        <td>IngestionManager=OBS_Sailing already exists in WSC. Needs feed access for AC events.</td>
-      </tr>
-      <tr>
-        <td><strong>DataSportsGroup (DSG) Sailing API</strong></td>
-        <td>Olympics, European Championships, World Sailing Grand Slam</td>
-        <td>REST API, JSON</td>
-        <td><span class="badge badge-gray">Not integrated</span></td>
-        <td>DSG is a known provider. Need to check if America's Cup 38 is in their catalog. DSG has sailing API at dsg-api.com/sailing/.</td>
-      </tr>
-      <tr>
-        <td><strong>Official America's Cup Live Data</strong></td>
-        <td>All AC38 events (full race telemetry)</td>
-        <td>AC proprietary API / Advanced Dashboard</td>
-        <td><span class="badge badge-gray">No access agreement</span></td>
-        <td>Richest possible feed. Requires commercial relationship with America's Cup Event Ltd. AC has official Advanced Dashboard with real-time position, speed, wind data.</td>
-      </tr>
-      <tr>
-        <td><strong>SailGP / Oracle Cloud</strong></td>
-        <td>SailGP F50 series (10+ global events)</td>
-        <td>Oracle REST Data Services</td>
-        <td><span class="badge badge-gray">Not evaluated</span></td>
-        <td>SailGP is a separate series from America's Cup but uses same boat class (F50). Separate commercial path. Long-term opportunity.</td>
-      </tr>
-    </table>
+    <h2>&#128225; Official America's Cup Data Provider</h2>
+    <div class="teal-tldr">TL;DR &mdash; <strong>Capgemini</strong> was the official Global Partner &amp; data provider for AC37 (Barcelona 2024). AC38 official tech partner not yet announced. Capgemini is the primary ingestion target to approach.</div>
+    <p>The only relevant data source for America's Cup content is the official AC data infrastructure</p>
   </div>
 
   <div class="card sailing">
-    <h3>Provider Deep Dive: OBS_Sailing (Existing Asset)</h3>
-    <div class="highlight">
-      This is WSC's most immediately actionable asset. The <code>OBS_Sailing</code> IngestionManager is already configured on all 5 Yacht Sailing systems. The question is: what events does it cover, and can it reach America's Cup?
-    </div>
-    <p><strong>Action items:</strong></p>
-    <ol>
-      <li>Ask Tal Kalderon / the ingestion team: what data does OBS_Sailing currently ingest?</li>
-      <li>Check if OBS has an agreement with America's Cup Event Ltd for data rights</li>
-      <li>OBS typically covers Olympic sailing only &mdash; AC is not Olympic. May require separate connection.</li>
-      <li>If OBS doesn't cover AC, can the same ingestion infrastructure connect to DSG or AC official feed?</li>
-    </ol>
+    <h3>Capgemini &mdash; Official AC Data Partner (AC37)</h3>
+    <p>Capgemini became the <strong>Global Partner and official data technology provider</strong> for the 37th America's Cup (Barcelona, Aug&ndash;Oct 2024). Their role covers the full AC campaign including the Louis Vuitton Cup, Youth America's Cup, and Puig Women's America's Cup.</p>
+    <table>
+      <tr><th>Attribute</th><th>Detail</th></tr>
+      <tr><td><strong>Role</strong></td><td>Global Partner &amp; Official Data Technology Provider</td></tr>
+      <tr><td><strong>Event</strong></td><td>37th America's Cup &mdash; Barcelona 2024 (most recent edition)</td></tr>
+      <tr><td><strong>Key Technology</strong></td><td>WindSight IQ&trade; &mdash; real-time LiDAR wind data visualisation across the full race course. Live telemetry graphics and boat tracking overlaid on broadcast.</td></tr>
+      <tr><td><strong>Data Infrastructure</strong></td><td>Real-time position (GPS/iXblue Airins inertial nav system), SOG, VMG, TWS/TWD, foil height sensors, umpire penalty feed, start line transponders</td></tr>
+      <tr><td><strong>AC38 Status</strong></td><td><span class="badge badge-orange">Not yet confirmed</span> &mdash; No official announcement as of March 2026. AC38 Naples 2027 partner TBD.</td></tr>
+      <tr><td><strong>Source</strong></td><td><a href="https://www.capgemini.com/news/press-releases/capgemini-to-become-global-partner-of-the-37th-americas-cup/" target="_blank">Capgemini press release, Jan 2024</a></td></tr>
+    </table>
   </div>
 
   <div class="card">
-    <h3>Data Field Availability Assessment</h3>
+    <h3>What the AC Official Feed Provides (AC37 reference)</h3>
     <table>
-      <tr><th>Data Field</th><th>OBS_Sailing</th><th>DSG API</th><th>AC Official</th><th>Needed For</th></tr>
-      <tr><td>Race position by leg</td><td>&#10003; (Olympics)</td><td>&#10003;</td><td>&#10003;</td><td>Mark Rounding, Lead Change</td></tr>
-      <tr><td>Boat speed (SOG)</td><td>&#10003; (Olympics)</td><td>&#10007;</td><td>&#10003;</td><td>Foiling Moment, Speed Record</td></tr>
-      <tr><td>Penalty events</td><td>&#10003;</td><td>&#10007;</td><td>&#10003;</td><td>Penalty / Spin</td></tr>
-      <tr><td>Tack/Gybe events</td><td>&#10003;</td><td>&#10007;</td><td>&#10003;</td><td>Tack, Gybe actions</td></tr>
-      <tr><td>OCS (false start)</td><td>&#10003;</td><td>&#10007;</td><td>&#10003;</td><td>OCS action</td></tr>
-      <tr><td>GPS position (real-time)</td><td>&#10003;</td><td>Partial</td><td>&#10003;</td><td>Crossing, Lead Change</td></tr>
-      <tr><td>Player/crew attribution</td><td>Partial</td><td>&#10003;</td><td>&#10003;</td><td>Player Highlights, Stories</td></tr>
-      <tr><td>Foil height / telemetry</td><td>&#10007;</td><td>&#10007;</td><td>&#10003;</td><td>Foiling Moment (precise)</td></tr>
+      <tr><th>Data Field</th><th>Available</th><th>Needed For</th></tr>
+      <tr><td>Race position by leg (at each mark)</td><td><span class="badge badge-green">&#10003; Real-time</span></td><td>Mark Rounding, Lead Change</td></tr>
+      <tr><td>Boat speed &mdash; SOG (knots)</td><td><span class="badge badge-green">&#10003; Real-time</span></td><td>Foiling Moment, Speed Record, Boat Speed parameter</td></tr>
+      <tr><td>GPS / inertial position (iXblue Airins)</td><td><span class="badge badge-green">&#10003; Real-time</span></td><td>Crossing, Lead Change, Mark Rounding precision</td></tr>
+      <tr><td>Wind data &mdash; TWS / TWD (LiDAR)</td><td><span class="badge badge-green">&#10003; Real-time</span></td><td>Wind Condition parameter, race context</td></tr>
+      <tr><td>Penalty / umpire events</td><td><span class="badge badge-green">&#10003;</span></td><td>Penalty / Spin action</td></tr>
+      <tr><td>Start line timing / OCS transponder</td><td><span class="badge badge-green">&#10003;</span></td><td>OCS / False Start action</td></tr>
+      <tr><td>Tack / Gybe heading data</td><td><span class="badge badge-green">&#10003;</span></td><td>Tack, Gybe actions</td></tr>
+      <tr><td>Foil height / telemetry (100+ boat sensors)</td><td><span class="badge badge-green">&#10003;</span></td><td>Foiling Moment (precise trigger)</td></tr>
+      <tr><td>Player / crew attribution</td><td><span class="badge badge-orange">Partial</span></td><td>Player Highlights, Stories</td></tr>
     </table>
-    <p style="font-size:0.82rem;color:var(--gray);margin-top:0.5rem;">DSG API field availability for America's Cup specifically is TBD &mdash; requires a discovery call with DSG.</p>
+  </div>
+
+  <div class="card alert">
+    <h3>&#128680; Key Open Question</h3>
+    <p>AC38 official technology partner has not been announced. Before any ingestion build decision:</p>
+    <ol>
+      <li><strong>Confirm AC38 data partner</strong> &mdash; is Capgemini renewing for Naples 2027, or is there a new vendor?</li>
+      <li><strong>Check API accessibility</strong> &mdash; does the official AC data feed have a media partner API, or is it broadcast-only?</li>
+      <li><strong>Commercial access</strong> &mdash; access to the AC official feed likely requires a direct agreement with <a href="https://www.americascup.com" target="_blank">America's Cup Event Ltd</a> or through the official data partner.</li>
+    </ol>
+    <div class="highlight" style="margin-top:0.75rem;">
+      <strong>Suggested next step:</strong> Reach out to the America's Cup commercial team (via WSC AM/DM contact) to ask: who is the data/technology partner for AC38, and is there a media data API available to content partners?
+    </div>
   </div>
 
   <div class="page-nav">
