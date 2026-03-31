@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yacht Sailing &mdash; America's Cup 2026/27 Full Analysis</title>
+<style>
+  :root { --blue: #2563eb; --green: #16a34a; --red: #dc2626; --orange: #ea580c; --gray: #64748b; --bg: #f8fafc; --card: #fff; --border: #e2e8f0; --sidebar-w: 260px; --purple: #7c3aed; --teal: #0d9488; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: #1e293b; line-height: 1.6; }
+  .sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh; background: #0f172a; color: #cbd5e1; overflow-y: auto; padding: 1.25rem 0; z-index: 100; display: flex; flex-direction: column; }
+  .sidebar-header { padding: 0 1.25rem 1rem; border-bottom: 1px solid #334155; margin-bottom: 0.5rem; }
+  .sidebar-header h1 { font-size: 1rem; color: #fff; line-height: 1.3; }
+  .sidebar-header p { font-size: 0.7rem; color: #94a3b8; margin-top: 0.25rem; }
+  .sidebar nav { flex: 1; }
+  .nav-section { padding: 0.5rem 0; }
+  .nav-item { display: block; padding: 0.45rem 1.25rem; font-size: 0.82rem; color: #94a3b8; text-decoration: none; cursor: pointer; border-left: 3px solid transparent; transition: background 0.15s, color 0.15s, border-color 0.15s; user-select: none; }
+  .nav-item:hover { background: #1e293b; color: #e2e8f0; }
+  .nav-item.active { background: #1e293b; color: #fff; border-left-color: var(--teal); font-weight: 600; }
+  .nav-item .nav-icon { margin-right: 0.4rem; font-size: 0.85rem; }
+  .nav-section-title { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: #64748b; padding: 0.4rem 1.25rem; font-weight: 700; cursor: default; }
+  .main { margin-left: var(--sidebar-w); min-height: 100vh; }
+  .page { display: none; padding: 2rem 2.5rem 3rem; max-width: 940px; animation: fadeIn 0.2s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .page-header { margin-bottom: 1.75rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
+  .page-header h2 { font-size: 1.5rem; margin-bottom: 0.2rem; }
+  .page-header p { color: var(--gray); font-size: 0.9rem; }
+  h3 { font-size: 1.1rem; margin: 1.25rem 0 0.75rem; }
+  h4 { font-size: 0.9rem; margin: 1rem 0 0.5rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .card.sol-a { border-left: 4px solid var(--blue); }
+  .card.sol-b { border-left: 4px solid var(--green); }
+  .card.sol-c { border-left: 4px solid var(--purple); }
+  .card.context { border-left: 4px solid var(--orange); }
+  .card.sailing { border-left: 4px solid var(--teal); }
+  .card.alert { border-left: 4px solid var(--red); background: #fff5f5; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; margin-right: 0.5rem; }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+  .badge-green { background: #dcfce7; color: #166534; }
+  .badge-red { background: #fee2e2; color: #991b1b; }
+  .badge-orange { background: #ffedd5; color: #9a3412; }
+  .badge-gray { background: #f1f5f9; color: #475569; }
+  .badge-teal { background: #ccfbf1; color: #0f766e; }
+  table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.88rem; }
+  th, td { padding: 0.55rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: #f1f5f9; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  .pro { color: var(--green); } .con { color: var(--red); }
+  ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+  li { margin: 0.3rem 0; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  .highlight { background: #fef9c3; padding: 1rem; border-radius: 8px; border: 1px solid #fde047; margin: 1rem 0; }
+  .alert-box { background: #fff1f2; padding: 1rem; border-radius: 8px; border: 1px solid #fca5a5; margin: 1rem 0; }
+  .verdict { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); padding: 1.5rem; border-radius: 12px; border: 1px solid #5eead4; }
+  a.jira-link { color: var(--blue); text-decoration: none; font-weight: 500; }
+  a.jira-link:hover { text-decoration: underline; }
+  a { color: var(--blue); }
+  code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+  .money { background: linear-gradient(90deg, #fef9c3, #fef08a); padding: 2px 8px; border-radius: 4px; font-weight: 700; color: #854d0e; white-space: nowrap; }
+  .money-row td { background: #fffbeb; }
+  .page-nav { display: flex; justify-content: space-between; margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+  .page-nav-btn { padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 8px; background: #fff; color: var(--blue); font-size: 0.85rem; cursor: pointer; text-decoration: none; transition: all 0.15s; }
+  .page-nav-btn:hover { background: #f0fdfa; border-color: var(--teal); }
+  .page-nav-btn.disabled { opacity: 0.3; pointer-events: none; }
+  .page-nav-label { font-size: 0.7rem; color: var(--gray); text-transform: uppercase; }
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  .stat-box { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 1rem; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .stat-box .stat-val { font-size: 1.6rem; font-weight: 700; color: var(--teal); }
+  .stat-box .stat-lbl { font-size: 0.72rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.2rem; }
+  .tldr { background: #eff6ff; padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 10px; color: #1e40af; font-weight: 600; border-left: 3px solid #3b82f6; }
+  .teal-tldr { background: #f0fdfa; padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 10px; color: #0f766e; font-weight: 600; border-left: 3px solid #14b8a6; }
+  .urgent { background: #fff1f2; padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 10px; color: #9f1239; font-weight: 600; border-left: 3px solid #f43f5e; }
+  .action-tag { display: inline-block; background: #e0f2fe; color: #0369a1; border-radius: 4px; padding: 1px 7px; font-size: 0.8rem; font-weight: 600; margin: 2px; }
+  .action-new { display: inline-block; background: #dcfce7; color: #166534; border-radius: 4px; padding: 1px 7px; font-size: 0.8rem; font-weight: 600; margin: 2px; }
+  .action-missing { display: inline-block; background: #fee2e2; color: #991b1b; border-radius: 4px; padding: 1px 7px; font-size: 0.8rem; font-weight: 600; margin: 2px; }
+  .param-pill { display: inline-block; background: #f3e8ff; color: #6b21a8; border-radius: 4px; padding: 1px 7px; font-size: 0.78rem; font-weight: 500; margin: 2px; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h1>&#9973;&#65039; Yacht Sailing Analysis</h1>
+    <p>Manor Birman, PM &middot; March 2026</p>
+  </div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Overview</div>
+      <a class="nav-item active" data-page="hero"><span class="nav-icon">&#127968;</span> Executive Summary</a>
+      <a class="nav-item" data-page="context"><span class="nav-icon">&#128202;</span> Business Signals</a>
+      <a class="nav-item" data-page="schedule"><span class="nav-icon">&#128197;</span> AC 2026/27 Schedule</a>
+      <a class="nav-item" data-page="jira"><span class="nav-icon">&#127915;</span> Jira Landscape</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Sport Analysis</div>
+      <a class="nav-item" data-page="fundamentals"><span class="nav-icon">&#9973;&#65039;</span> Sport Fundamentals</a>
+      <a class="nav-item" data-page="current-state"><span class="nav-icon">&#128269;</span> Current WSC State</a>
+      <a class="nav-item" data-page="actions"><span class="nav-icon">&#127919;</span> Actions &amp; Enhancements</a>
+      <a class="nav-item" data-page="autotag"><span class="nav-icon">&#128247;</span> Auto-tag Opportunities</a>
+      <a class="nav-item" data-page="stories"><span class="nav-icon">&#128218;</span> In-App Stories</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Data &amp; Ingestion</div>
+      <a class="nav-item" data-page="providers"><span class="nav-icon">&#128225;</span> Data Providers</a>
+      <a class="nav-item" data-page="broadcast"><span class="nav-icon">&#127916;</span> Broadcast Use Cases</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Decision</div>
+      <a class="nav-item" data-page="sol-a"><span class="nav-icon" style="color:#60a5fa;">A</span> Manual MVP + Enhance</a>
+      <a class="nav-item" data-page="sol-b"><span class="nav-icon" style="color:#4ade80;">B</span> Ingest + Enhance</a>
+      <a class="nav-item" data-page="sol-c"><span class="nav-icon" style="color:#a78bfa;">C</span> Status Quo</a>
+      <a class="nav-item" data-page="historical"><span class="nav-icon">&#128200;</span> Historical Evidence</a>
+      <a class="nav-item" data-page="comparison"><span class="nav-icon">&#9878;&#65039;</span> Comparison Table</a>
+      <a class="nav-item" data-page="recommendation"><span class="nav-icon">&#127919;</span> Recommendation</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Appendix</div>
+      <a class="nav-item" data-page="references"><span class="nav-icon">&#128206;</span> All Sources</a>
+    </div>
+  </nav>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+<!-- PAGE: Executive Summary / Hero -->
+<div class="page active" id="hero">
+  <div class="page-header">
+    <h2>&#9973;&#65039; Yacht Sailing &mdash; America's Cup 2026/27 Analysis</h2>
+    <div class="teal-tldr">TL;DR &mdash; Sport already live (SystemTypeId 52). America's Cup Regatta 1 is in <strong>~52 days</strong>. Sport model is thin: only 5 actions, no Stories, no data provider. We must act now.</div>
+    <p>Full analysis: manual vs. ingestion decision &bull; sport model enhancements &bull; auto-tag opportunities &bull; in-app stories</p>
+  </div>
+
+  <div class="alert-box">
+    <strong>&#128680; URGENT:</strong> America's Cup Preliminary Regatta 1 starts <strong>May 21, 2026</strong> &mdash; that is ~52 days from today. There is not enough time to build and test ingestion. Manual MVP is the only viable path for Regatta 1. However, sport model enhancements can ship immediately and must be prioritized NOW.
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-box">
+      <div class="stat-val">52</div>
+      <div class="stat-lbl">WSC SystemTypeId (live)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">5</div>
+      <div class="stat-lbl">Current actions (very thin)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">52 days</div>
+      <div class="stat-lbl">To Preliminary Regatta 1</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">3 Solutions</div>
+      <div class="stat-lbl">Analyzed (Manual / Ingest / Status Quo)</div>
+    </div>
+  </div>
+
+  <div class="card sailing">
+    <h3>What This Analysis Covers</h3>
+    <div class="grid-2">
+      <div>
+        <h4>Decision Questions</h4>
+        <ul>
+          <li><strong>Manual vs. Ingestion</strong> &mdash; commercial and effort analysis for America's Cup 2026/27</li>
+          <li><strong>Sport model gaps</strong> &mdash; what actions and parameters are missing</li>
+          <li><strong>Auto-tag opportunities</strong> &mdash; what can WSC auto-detect in sailing broadcast</li>
+          <li><strong>In-app Stories</strong> &mdash; what containers to add and what stories to create</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Key Context</h4>
+        <ul>
+          <li>Sport <strong>already exists</strong> in WSC: SystemTypeId 52, ResolverType=YachtSailing</li>
+          <li>1 Operational system: <code>America's Cup - Men</code> (Id 52379)</li>
+          <li>IngestionManager: <code>OBS_Sailing</code> exists but not connected to AC data</li>
+          <li>PM currently assigned: Nizan Cohen (handoff to Manor scope?)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>The Core Tension</h3>
+    <table>
+      <tr><th>Approach</th><th>Time to Ready</th><th>Est. Cost</th><th>Coverage</th><th>Best For</th></tr>
+      <tr><td><strong>A. Manual MVP + Enhance model</strong></td><td><span class="badge badge-green">Now (model: 2 weeks)</span></td><td class="money">$10-20/race for ops</td><td>Any event, immediate</td><td>Regatta 1 (May 2026)</td></tr>
+      <tr><td><strong>B. Full Ingestion + Enhance model</strong></td><td><span class="badge badge-orange">3-4 months build</span></td><td class="money">$45-90K total dev</td><td>Auto for all races</td><td>LVC + Match (2027)</td></tr>
+      <tr><td><strong>C. Status Quo</strong></td><td><span class="badge badge-red">Today</span></td><td>$0</td><td>5 actions only, no stories</td><td>Not recommended</td></tr>
+    </table>
+  </div>
+
+  <div class="card verdict">
+    <h3>&#127919; Recommended Path (Preview)</h3>
+    <ol>
+      <li><strong>Immediately</strong>: Enhance sport model (add 10+ actions, parameters, Stories containers) &mdash; 2 sprint effort</li>
+      <li><strong>May 2026 (Regatta 1)</strong>: Manual MVP with enhanced model. Validate content quality. Gather data.</li>
+      <li><strong>Post-Regatta 1 evaluation</strong>: Assess DSG or OBS_Sailing feed for automated ingestion ahead of LVC (May 2027)</li>
+    </ol>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn disabled">&#8592; Previous</a>
+    <div></div>
+    <a class="page-nav-btn" onclick="showPage('context')">Next: Business Signals &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Business Signals -->
+<div class="page" id="context">
+  <div class="page-header">
+    <h2>&#128202; Business Signals</h2>
+    <div class="tldr">TL;DR &mdash; No confirmed revenue deal yet. America's Cup is an IOC-adjacent Olympic sport (sailing appears at Dakar 2026 YOG). Strategic importance: premium global audience, unique visual format.</div>
+    <p>Deal pipeline, client commitment, and commercial context for Yacht Sailing at WSC</p>
+  </div>
+
+  <div class="card context">
+    <h3>Active Commercial Signals</h3>
+    <table>
+      <tr><th>Signal</th><th>Detail</th><th>Relevance</th><th>Source</th></tr>
+      <tr><td><strong>IOC / Olympics</strong></td><td>Sailing is part of the Paris 2024 Olympics scope. IOC is a WSC client. Sailing listed explicitly in DEV-270026 as future Olympic scope.</td><td><strong>High &mdash; existing relationship</strong></td><td>Jira DEV-270026</td></tr>
+      <tr><td><strong>Dakar 2026 YOG</strong></td><td>Sailing listed among 25 competition sports for Dakar Youth Olympics (Oct-Nov 2026). Discovery idea PRO-1346 in progress.</td><td><strong>High &mdash; upcoming event with scope overlap</strong></td><td>Jira PRO-1346</td></tr>
+      <tr><td><strong>America's Cup - Men</strong></td><td>System already operational in WSC (Id 52379). Suggests commercial relationship or active trial for AC content.</td><td><strong>Medium &mdash; confirm with AM/DM</strong></td><td>DB: dbo.Systems</td></tr>
+      <tr><td><strong>Youth &amp; Women's AC</strong></td><td>Test systems exist for Youth (52380) and Women (52381) &mdash; suggests active engagement with multiple AC categories.</td><td><strong>Medium &mdash; expansion potential</strong></td><td>DB: dbo.Systems</td></tr>
+    </table>
+  </div>
+
+  <div class="card context">
+    <h3>Market &amp; Competitive Signals</h3>
+    <table>
+      <tr><th>Signal</th><th>Detail</th></tr>
+      <tr><td>America's Cup audience</td><td>38th AC estimated global audience: 80-100M+. Previous 37th AC (Barcelona) streamed to 220 countries. Premium, affluent, tech-savvy demographics. Strong in US, UK, NZ, Italy, France.</td></tr>
+      <tr><td>SailGP momentum</td><td>SailGP Series runs year-round with 10+ events globally. Oracle Cloud partnership demonstrates premium data infrastructure. WSC has no SailGP system today.</td></tr>
+      <tr><td>DataSportsGroup</td><td>DSG offers sailing API covering Olympics, European Championships, World Sailing Grand Slam events. Feasibility to cover America's Cup TBD.</td></tr>
+      <tr><td>OBS_Sailing ingestion manager</td><td>WSC already has an <code>OBS_Sailing</code> IngestionManager configured on Yacht Sailing systems &mdash; originally built for Olympic sailing. This is a significant existing asset.</td></tr>
+      <tr><td>Broadcast tech leaders</td><td>LiveLine (SailGP) processes 1.15B data requests/hr per boat. America's Cup has official live telemetry dashboard with SOG, VMG, TWS/TWD. Data infrastructure clearly exists.</td></tr>
+    </table>
+  </div>
+
+  <div class="card context">
+    <h3>Revenue &amp; Cost Model</h3>
+    <table>
+      <tr><th>Event</th><th>Races (Est.)</th><th>Manual Hrs/Race</th><th>Cost/Race</th><th>Total Manual Cost</th></tr>
+      <tr><td>Preliminary Regatta 1 (May 2026)</td><td>~8 races</td><td>1.5 hrs</td><td class="money">$15</td><td class="money">$120</td></tr>
+      <tr><td>Preliminary Regatta 2 (Jul 2026)</td><td>~8 races</td><td>1.5 hrs</td><td class="money">$15</td><td class="money">$120</td></tr>
+      <tr><td>Preliminary Regatta 3 (Early 2027)</td><td>~8 races</td><td>1.5 hrs</td><td class="money">$15</td><td class="money">$120</td></tr>
+      <tr><td>Louis Vuitton Cup (May-Jun 2027)</td><td>~40 races</td><td>1.5 hrs</td><td class="money">$15</td><td class="money">$600</td></tr>
+      <tr><td>Youth + Women's AC (Jun-Jul 2027)</td><td>~20 races</td><td>1.5 hrs</td><td class="money">$15</td><td class="money">$300</td></tr>
+      <tr><td>38th America's Cup Match (Jul 2027)</td><td>~7 races</td><td>1.5 hrs</td><td class="money">$15</td><td class="money">$105</td></tr>
+      <tr class="money-row"><td><strong>TOTAL MANUAL (full campaign)</strong></td><td><strong>~91 races</strong></td><td>&mdash;</td><td>&mdash;</td><td class="money"><strong>~$1,365 total ops cost</strong></td></tr>
+    </table>
+    <p style="font-size:0.82rem;color:var(--gray);margin-top:0.5rem;">Manual cost is negligible versus any deal value. This removes cost from the build-vs-manual equation &mdash; the decision is purely about content quality and client expectations.</p>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('hero')">&#8592; Executive Summary</a>
+    <a class="page-nav-btn" onclick="showPage('schedule')">Next: Schedule &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: America's Cup Schedule -->
+<div class="page" id="schedule">
+  <div class="page-header">
+    <h2>&#128197; America's Cup 2026/27 Event Schedule</h2>
+    <div class="urgent">URGENT: Preliminary Regatta 1 is May 21&ndash;24, 2026 &mdash; ~52 days away. Model enhancements must ship before this date.</div>
+    <p>Full calendar of America's Cup events requiring WSC content</p>
+  </div>
+
+  <div class="card alert">
+    <h3>&#128680; Time Pressure Summary</h3>
+    <ul>
+      <li><strong>52 days</strong> to Preliminary Regatta 1 (Cagliari, Sardinia) &mdash; AC40 boats</li>
+      <li><strong>No ingestion build</strong> is feasible in this window. Minimum build time: 3+ months.</li>
+      <li><strong>Sport model enhancements</strong> can ship in 1-2 sprints if prioritized this week</li>
+      <li><strong>Stories containers</strong> can be added without code changes via Buster &mdash; do this immediately</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Full Event Calendar</h3>
+    <table>
+      <tr><th>Event</th><th>Category</th><th>Date</th><th>Location</th><th>Boat Class</th><th>WSC Status</th></tr>
+      <tr><td><strong>Preliminary Regatta 1</strong></td><td>Open / Youth / Women*</td><td><strong style="color:var(--red);">May 21&ndash;24, 2026</strong></td><td>Cagliari, Sardinia</td><td>AC40</td><td><span class="badge badge-orange">Manual only</span></td></tr>
+      <tr><td><strong>Preliminary Regatta 2</strong></td><td>Open</td><td>June/July 2026 (TBD)</td><td>TBD</td><td>AC40</td><td><span class="badge badge-orange">Manual only</span></td></tr>
+      <tr><td><strong>Preliminary Regatta 3</strong></td><td>Open</td><td>Early 2027</td><td>Naples, Italy</td><td>AC40</td><td><span class="badge badge-gray">TBD</span></td></tr>
+      <tr><td><strong>Louis Vuitton Cup</strong> (Challenger Selection)</td><td>Open</td><td>May &ndash; June 2027</td><td>Naples, Italy</td><td>AC75</td><td><span class="badge badge-gray">Ingest candidate</span></td></tr>
+      <tr><td><strong>Youth America's Cup</strong></td><td>Youth (Under 25)</td><td>June/July 2027</td><td>Naples, Italy</td><td>AC40</td><td><span class="badge badge-gray">TBD</span></td></tr>
+      <tr><td><strong>Puig Women's America's Cup</strong></td><td>Women</td><td>June/July 2027</td><td>Naples, Italy</td><td>AC40</td><td><span class="badge badge-gray">TBD</span></td></tr>
+      <tr><td><strong>38th America's Cup Match</strong></td><td>Defender vs. Challenger</td><td><strong>July 10&ndash;18, 2027</strong></td><td>Naples, Italy</td><td>AC75</td><td><span class="badge badge-gray">Ingest if deal</span></td></tr>
+    </table>
+    <p style="font-size:0.82rem;color:var(--gray);">*Note: Preliminary Regatta 1 includes Youth and Women categories on select days using AC40. All AC75 races (LVC + Match) are the premium format with full foiling at 50+ knots.</p>
+  </div>
+
+  <div class="card sailing">
+    <h3>Content Volume Estimate</h3>
+    <div class="grid-3">
+      <div class="stat-box">
+        <div class="stat-val">~91</div>
+        <div class="stat-lbl">Total races across campaign</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val">~5-10</div>
+        <div class="stat-lbl">Key actions per race</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val">~455-910</div>
+        <div class="stat-lbl">Total taggable actions</div>
+      </div>
+    </div>
+    <p style="font-size:0.85rem;margin-top:1rem;">Yacht racing is a <strong>low-volume, high-value</strong> sport. Each race lasts 20-45 minutes with ~5-10 meaningful moments. Unlike soccer or cricket, the content model is about intensity, not breadth.</p>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('context')">&#8592; Business Signals</a>
+    <a class="page-nav-btn" onclick="showPage('jira')">Next: Jira Landscape &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Jira Landscape -->
+<div class="page" id="jira">
+  <div class="page-header">
+    <h2>&#127915; Jira Landscape</h2>
+    <div class="tldr">TL;DR &mdash; No dedicated Yacht Sailing epic. Sailing appears in two strategic initiatives: Olympic multi-sport-type epic (DEV-270026) and Dakar 2026 YOG discovery (PRO-1346). Both are in progress.</div>
+    <p>All Jira tickets found related to Sailing / Yacht Sailing</p>
+  </div>
+
+  <div class="card">
+    <h3>Key Tickets Found</h3>
+    <table>
+      <tr><th>Ticket</th><th>Summary</th><th>Type</th><th>Status</th><th>Assignee</th><th>Priority</th></tr>
+      <tr>
+        <td><a class="jira-link" href="https://wsc-sports.atlassian.net/browse/DEV-270026" target="_blank">DEV-270026</a></td>
+        <td>Enable Sports to work with multiple sub-sports types - OneClick</td>
+        <td>Epic</td>
+        <td><span class="badge badge-orange">Tech Review</span></td>
+        <td>Dan Dragucki</td>
+        <td>P0</td>
+      </tr>
+      <tr>
+        <td><a class="jira-link" href="https://wsc-sports.atlassian.net/browse/PRO-1346" target="_blank">PRO-1346</a></td>
+        <td>Dakar Youth Summer Olympics 2026 &ndash; New scope (sports TBD, includes Sailing)</td>
+        <td>Idea</td>
+        <td><span class="badge badge-orange">Unit Review</span></td>
+        <td>Dan Dragucki</td>
+        <td>&mdash;</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card sailing">
+    <h3>What DEV-270026 Means for Sailing</h3>
+    <p>This P0 Epic explicitly lists <strong>Sailing</strong> as one of the Olympic sports requiring multi-sport-type support (OneVsMany / OneVsOne format). The DOD mentions:</p>
+    <ul>
+      <li>Cycling Track, Archery, <strong>Sailing</strong>, Short Track Speed Skating, Ski Disciplines as target sports</li>
+      <li>First release is Golf only (Ryder Cup/Presidents Cup); Sailing is in follow-up scope</li>
+      <li>Documentation will cover how to onboard Sailing in follow-up work</li>
+    </ul>
+    <div class="highlight">
+      <strong>Implication:</strong> When DEV-270026 ships, Sailing will need to be configured as a multi-competition sport (OneVsMany / multiple teams in a race). This is architecturally significant &mdash; today America's Cup races are modeled as Team A vs Team B, but sailing often involves multiple boats/teams in one race.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>What PRO-1346 Means for Sailing</h3>
+    <p>Dakar 2026 YOG (Oct-Nov 2026) includes Sailing among 25 competition sports. The discovery notes:</p>
+    <ul>
+      <li>Most sports are already supported, but some need sport model improvements</li>
+      <li>PBP for most sports would be entered manually</li>
+      <li>Need to test sports and understand expected PBP structure from the provider</li>
+    </ul>
+    <div class="highlight">
+      <strong>Implication:</strong> Sailing improvements for America's Cup (model enhancements, Stories) directly benefit the Dakar 2026 YOG scope, creating a <strong>1-to-N value multiplier</strong> on any investment made now.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Key Insight</h3>
+    <p>The Jira landscape tells us:</p>
+    <ol>
+      <li><strong>No dedicated Sailing epic</strong> &mdash; this analysis should become the basis for one</li>
+      <li><strong>Strategic alignment exists</strong> at the platform level (DEV-270026) and product discovery level (PRO-1346)</li>
+      <li><strong>Dan Dragucki is the key stakeholder</strong> on both tickets &mdash; align with him on timing</li>
+      <li><strong>No blocker tickets</strong> found &mdash; the path to enhancement is clear</li>
+    </ol>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('schedule')">&#8592; Schedule</a>
+    <a class="page-nav-btn" onclick="showPage('fundamentals')">Next: Sport Fundamentals &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Sport Fundamentals -->
+<div class="page" id="fundamentals">
+  <div class="page-header">
+    <h2>&#9973;&#65039; Sport Fundamentals</h2>
+    <div class="teal-tldr">TL;DR &mdash; Sailing is a Racing sport (not ball sport). Race format = multiple boats on a course with marks. Unique: multiple competitors per "game," position-based scoring, no fixed time clock.</div>
+    <p>Race structure, scoring, game progress, and key sport-specific concepts for WSC</p>
+  </div>
+
+  <div class="card sailing">
+    <h3>Race Format &amp; Structure (America's Cup)</h3>
+    <div class="grid-2">
+      <div>
+        <h4>AC75 Format (LVC + Match)</h4>
+        <ul>
+          <li>Two boats race head-to-head (OneVsOne)</li>
+          <li>Match racing format: position/finishing order determines winner</li>
+          <li>Race course: windward-leeward gates with multiple mark roundings</li>
+          <li>Typically 4-6 legs per race (up, down, up, down...)</li>
+          <li>Race duration: 20-30 minutes (AC75 foiling at 40-50+ knots)</li>
+          <li>OCS (On Course Side): false start infringement</li>
+        </ul>
+      </div>
+      <div>
+        <h4>AC40 Format (Regattas)</h4>
+        <ul>
+          <li>Multiple boats (4-5 teams) racing simultaneously</li>
+          <li>Fleet racing format: all teams sail the same course</li>
+          <li>Scoring: 1st = 1 point, 2nd = 2 points... lowest score wins series</li>
+          <li>Race duration: 20-40 minutes</li>
+          <li>Important: Fleet racing needs multi-competitor game model</li>
+          <li>Links to DEV-270026 (OneVsMany/ManyVsMany)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Game Progress Structure</h3>
+    <table>
+      <tr><th>Level</th><th>Granularity</th><th>WSC Model</th><th>Notes</th></tr>
+      <tr><td><strong>Series / Regatta</strong></td><td>Competition level</td><td>Competition/Round</td><td>Multiple races make a series. LVC = best of series to qualify.</td></tr>
+      <tr><td><strong>Race</strong></td><td>Individual game</td><td>Game</td><td>Single race = 1 WSC Game. 20-45 min duration.</td></tr>
+      <tr><td><strong>Leg</strong></td><td>Sub-race segment</td><td>Period / Part</td><td>Each upwind or downwind leg is a natural segment. 3-6 legs per race.</td></tr>
+      <tr><td><strong>Mark Rounding</strong></td><td>Action level</td><td>Action</td><td>Key transition point in race. Atomic tagging unit.</td></tr>
+      <tr><td><strong>Tack / Gybe</strong></td><td>Sub-action</td><td>Action (MISSING)</td><td>Direction changes &mdash; critical highlights, currently not modeled.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Key Sailing Terms for WSC Operators</h3>
+    <table>
+      <tr><th>Term</th><th>Definition</th><th>Highlight Value</th></tr>
+      <tr><td><strong>Mark Rounding</strong></td><td>Boat rounds a mark (buoy) to change direction. Position at mark is a critical race moment.</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td><strong>Tack</strong></td><td>Changing direction when sailing upwind. Boats zig-zag to beat upwind.</td><td>&#11088;&#11088;&#11088;</td></tr>
+      <tr><td><strong>Gybe</strong></td><td>Changing direction when sailing downwind. More dramatic/risky than tacking.</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td><strong>Foiling</strong></td><td>Boat rises out of water on hydrofoils. AC75s foil at 40-50+ knots. Visually spectacular.</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td><strong>Touchdown</strong></td><td>Foiling boat's hull touches the water. Loss of foil = significant speed loss.</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td><strong>Penalty / Spin</strong></td><td>Boat must do a 360&#176; turn penalty for infringement. Race-defining moment.</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td><strong>OCS</strong></td><td>On Course Side &mdash; false start. Boat must restart (huge momentum loss).</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td><strong>VMG</strong></td><td>Velocity Made Good &mdash; the effective speed toward the mark. Key performance metric.</td><td>&#11088;&#11088;</td></tr>
+      <tr><td><strong>TWS / TWD</strong></td><td>True Wind Speed / Direction. Race context, affects strategy and highlights.</td><td>&#11088;</td></tr>
+      <tr><td><strong>Crossing</strong></td><td>Starboard-tack boat has right of way. A boat "crossing" ahead of opponent is a lead indicator.</td><td>&#11088;&#11088;&#11088;</td></tr>
+    </table>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('jira')">&#8592; Jira Landscape</a>
+    <a class="page-nav-btn" onclick="showPage('current-state')">Next: Current WSC State &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Current WSC State -->
+<div class="page" id="current-state">
+  <div class="page-header">
+    <h2>&#128269; Current WSC State &mdash; Yacht Sailing</h2>
+    <div class="teal-tldr">TL;DR &mdash; Sport is live. 1 Operational system (America's Cup Men). 5 actions only. 5 containers. No data provider. No Stories. No Tack/Gybe/Penalty actions. Model is MVP-thin.</div>
+    <p>What exists today in the WSC platform for Yacht Sailing &mdash; based on DB query + SMT screenshot</p>
+  </div>
+
+  <div class="card sailing">
+    <h3>Systems in WSC Database</h3>
+    <table>
+      <tr><th>System ID</th><th>Name</th><th>Role</th><th>IngestionManager</th><th>ServiceProviderPrefix</th></tr>
+      <tr><td>52379</td><td><strong>America's Cup - Men</strong></td><td><span class="badge badge-green">Operational</span></td><td><code>OBS_Sailing</code></td><td><code>americancupteamnzm_</code></td></tr>
+      <tr><td>52380</td><td>TEST America's Cup - Youth</td><td><span class="badge badge-gray">Test</span></td><td><code>OBS_Sailing</code></td><td><code>americascupteamnzy_</code></td></tr>
+      <tr><td>52381</td><td>TEST America's Cup - Women</td><td><span class="badge badge-gray">Test</span></td><td><code>OBS_Sailing</code></td><td><code>americanscupteamnzw_</code></td></tr>
+      <tr><td>52374</td><td>Sailing qatest 01</td><td><span class="badge badge-gray">Test</span></td><td><code>OBS_Sailing</code></td><td><code>sailingqatest01_</code></td></tr>
+      <tr><td>52370</td><td>Sailing new sport qatest</td><td><span class="badge badge-gray">Dev</span></td><td><code>OBS_Sailing</code></td><td><code>sailingamerica_</code></td></tr>
+    </table>
+    <div class="highlight">
+      <strong>Key finding:</strong> All systems use <code>OBS_Sailing</code> as IngestionManager &mdash; originally built for Olympic Broadcasting Service sailing feeds. This infrastructure EXISTS and could be leveraged for America's Cup if OBS or similar data becomes available.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Current Containers (from SMT screenshot)</h3>
+    <table>
+      <tr><th>Container</th><th>Type</th><th>Status</th><th>Actions Configured</th></tr>
+      <tr><td><strong>Race HL</strong></td><td>GameHighlights</td><td><span class="badge badge-green">Operational (5)</span></td><td>Finish (Won), Start, Mark Rounding (Leading), Mark Rounding (LastToFirst), Finish (Lost)</td></tr>
+      <tr><td><strong>Action Container</strong></td><td>Action</td><td><span class="badge badge-green">Operational (5)</span></td><td>Rating 1-5, Ordering: ATP-Yacht</td></tr>
+      <tr><td><strong>HadAnAction</strong></td><td>HadAnAction</td><td><span class="badge badge-green">Operational (5)</span></td><td>Action Container - Action</td></tr>
+      <tr><td><strong>Top X</strong></td><td>TopXActions</td><td><span class="badge badge-gray">Configured</span></td><td>Action Container - Action</td></tr>
+      <tr><td><strong>All Made</strong></td><td>AllMade</td><td><span class="badge badge-green">Operational (5)</span></td><td>Action Container - Action</td></tr>
+      <tr><td><strong>Multiple Race HL</strong></td><td>CompiledGameHighlights</td><td><span class="badge badge-gray">Configured</span></td><td>Race HL - GameHighlights</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Current Actions in SMT</h3>
+    <div style="margin-bottom:0.75rem;">
+      <span class="action-tag">Finish (Won)</span>
+      <span class="action-tag">Finish (Lost)</span>
+      <span class="action-tag">Start</span>
+      <span class="action-tag">Mark Rounding (Leading, Yes)</span>
+      <span class="action-tag">Mark Rounding (LastToFirst)</span>
+    </div>
+    <p style="font-size:0.85rem;color:var(--gray);">Only <strong>5 actions</strong>. This is a bare-minimum model. Key actions like Tack, Gybe, Penalty, Foiling, and Race Position Change are completely missing.</p>
+  </div>
+
+  <div class="card alert">
+    <h3>&#10060; Critical Gaps vs. Full Sport Model</h3>
+    <div class="grid-2">
+      <div>
+        <h4>Missing Actions</h4>
+        <span class="action-missing">Tack</span>
+        <span class="action-missing">Gybe</span>
+        <span class="action-missing">Penalty / Spin</span>
+        <span class="action-missing">OCS (False Start)</span>
+        <span class="action-missing">Lead Change</span>
+        <span class="action-missing">Crossing</span>
+        <span class="action-missing">Capsize</span>
+        <span class="action-missing">Collision / Incident</span>
+        <span class="action-missing">Foiling Moment</span>
+        <span class="action-missing">Touchdown (foil fail)</span>
+        <span class="action-missing">Race Position (live)</span>
+        <span class="action-missing">Pre-start Maneuver</span>
+      </div>
+      <div>
+        <h4>Missing Parameters</h4>
+        <span class="param-pill">Leg Number (1-6)</span>
+        <span class="param-pill">Boat Speed (knots)</span>
+        <span class="param-pill">Race Position (1st/2nd)</span>
+        <span class="param-pill">Lead (boat lengths)</span>
+        <span class="param-pill">Wind Speed (TWS)</span>
+        <span class="param-pill">Foiling Status (Yes/No)</span>
+        <span class="param-pill">Penalty Type</span>
+        <span class="param-pill">Mark Name (A/B/Gate)</span>
+        <span class="param-pill">Position Direction (Up/Down)</span>
+        <span class="param-pill">Time Delta (seconds behind)</span>
+      </div>
+    </div>
+    <h4 style="margin-top:1rem;">Missing Containers</h4>
+    <span class="action-missing">Race Stories (in-app)</span>
+    <span class="action-missing">Player Stories</span>
+    <span class="action-missing">Team Stories</span>
+    <span class="action-missing">Action Stories</span>
+    <span class="action-missing">Period Highlights (per Leg)</span>
+    <span class="action-missing">Player Highlights</span>
+    <span class="action-missing">Player Game Highlights</span>
+    <span class="action-missing">Team Highlights</span>
+    <span class="action-missing">Team Game Highlights</span>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('fundamentals')">&#8592; Sport Fundamentals</a>
+    <a class="page-nav-btn" onclick="showPage('actions')">Next: Actions &amp; Enhancements &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Actions & Enhancements -->
+<div class="page" id="actions">
+  <div class="page-header">
+    <h2>&#127919; Actions &amp; Model Enhancements</h2>
+    <div class="teal-tldr">TL;DR &mdash; Add 10 new actions, 10 parameters. Priority actions: Tack, Gybe, Penalty/Spin, Lead Change, Foiling Moment. Can be done in SMT without code changes for most.</div>
+    <p>Full recommended action and parameter additions for the Yacht Sailing sport model</p>
+  </div>
+
+  <div class="card sailing">
+    <h3>Recommended New Actions</h3>
+    <table>
+      <tr><th>Action</th><th>Description</th><th>Highlight Value</th><th>PBP-Detectable?</th><th>Priority</th></tr>
+      <tr><td><span class="action-new">Tack</span></td><td>Upwind direction change. Tactical duel element. Shows boat handling skills.</td><td>&#11088;&#11088;&#11088;</td><td>Partial (needs position data)</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Gybe</span></td><td>Downwind direction change. More dramatic than tack, higher capsize risk.</td><td>&#11088;&#11088;&#11088;&#11088;</td><td>Partial (needs position data)</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Penalty / Spin</span></td><td>720&#176; penalty turn (or 360&#176;) for rule infringement. Race-defining moment.</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>Yes (if OBS feed)</td><td><strong>P0</strong></td></tr>
+      <tr><td><span class="action-new">OCS / False Start</span></td><td>Boat crosses start line early. Must restart. Massive disadvantage.</td><td>&#11088;&#11088;&#11088;&#11088;</td><td>Yes (if OBS feed)</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Lead Change</span></td><td>Boat overtakes competitor to take race lead. Most exciting moment in a race.</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>Derivable from position</td><td><strong>P0</strong></td></tr>
+      <tr><td><span class="action-new">Foiling Moment</span></td><td>Boat rises onto foils and achieves high-speed flight. Visually spectacular.</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>Yes (boat speed &gt; threshold)</td><td><strong>P0</strong></td></tr>
+      <tr><td><span class="action-new">Touchdown</span></td><td>Foiling boat's hull hits water. Loss of foil height. Momentum killer.</td><td>&#11088;&#11088;&#11088;&#11088;</td><td>Yes (telemetry)</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Capsize / Incident</span></td><td>Boat capsizes or collides with mark/opponent. Rare but high-impact.</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>Manual only</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Crossing</span></td><td>One boat crosses ahead of opponent on opposite tack. Tactical advantage signal.</td><td>&#11088;&#11088;&#11088;</td><td>Partial (position data)</td><td><strong>P2</strong></td></tr>
+      <tr><td><span class="action-new">Pre-start Maneuver</span></td><td>Boat positioning and tactics in the pre-start sequence. High drama for fans.</td><td>&#11088;&#11088;&#11088;</td><td>Manual only</td><td><strong>P2</strong></td></tr>
+      <tr><td><span class="action-new">Speed Record</span></td><td>Boat achieves peak speed in race (e.g., 54 knots). Broadcast stat highlight.</td><td>&#11088;&#11088;&#11088;&#11088;</td><td>Yes (telemetry)</td><td><strong>P2</strong></td></tr>
+    </table>
+  </div>
+
+  <div class="card sailing">
+    <h3>Recommended New Parameters (per existing + new actions)</h3>
+    <table>
+      <tr><th>Parameter</th><th>Type</th><th>Values</th><th>Action(s)</th><th>Priority</th></tr>
+      <tr><td><strong>Leg Number</strong></td><td>Enumeration</td><td>Leg 1, Leg 2, Leg 3, Leg 4, Leg 5, Leg 6</td><td>All actions</td><td><strong>P0</strong></td></tr>
+      <tr><td><strong>Race Position</strong></td><td>Enumeration</td><td>1st, 2nd, 3rd, 4th, 5th</td><td>Mark Rounding, Lead Change, Finish</td><td><strong>P0</strong></td></tr>
+      <tr><td><strong>Foiling Status</strong></td><td>Boolean</td><td>Foiling / Not Foiling</td><td>Mark Rounding, Tack, Gybe, Start</td><td><strong>P1</strong></td></tr>
+      <tr><td><strong>Penalty Type</strong></td><td>Enumeration</td><td>360 Spin, 720 Spin, DSQ, Redress, OCS</td><td>Penalty / Spin</td><td><strong>P0</strong></td></tr>
+      <tr><td><strong>Boat Speed (knots)</strong></td><td>Numeric</td><td>0-70 knots</td><td>Lead Change, Foiling Moment, Mark Rounding</td><td><strong>P1</strong></td></tr>
+      <tr><td><strong>Lead (time/distance)</strong></td><td>Enumeration</td><td>Close (&lt;5s), Medium (5-15s), Large (&gt;15s)</td><td>Mark Rounding, Lead Change</td><td><strong>P1</strong></td></tr>
+      <tr><td><strong>Mark Type</strong></td><td>Enumeration</td><td>Windward Mark, Leeward Mark, Gate, Start Line, Finish Line</td><td>Mark Rounding, Start, Finish</td><td><strong>P1</strong></td></tr>
+      <tr><td><strong>Wind Condition</strong></td><td>Enumeration</td><td>Light (&lt;10kn), Medium (10-18kn), Heavy (&gt;18kn)</td><td>Start, Race-level context</td><td><strong>P2</strong></td></tr>
+      <tr><td><strong>Incident Type</strong></td><td>Enumeration</td><td>Capsize, Mark Hit, Collision, Gear Failure, Retirement</td><td>Capsize / Incident</td><td><strong>P1</strong></td></tr>
+      <tr><td><strong>Direction</strong></td><td>Enumeration</td><td>Port, Starboard</td><td>Tack, Gybe</td><td><strong>P2</strong></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Enhanced Mark Rounding (existing action)</h3>
+    <p>The current Mark Rounding action has only two parameters. Enrich it:</p>
+    <div>
+      <strong>Currently:</strong>
+      <span class="action-tag">Leading: Yes</span>
+      <span class="action-tag">Last to First (position change)</span>
+    </div>
+    <div style="margin-top:0.5rem;">
+      <strong>Add these parameters:</strong>
+      <span class="action-new">Leg Number</span>
+      <span class="action-new">Race Position (1st, 2nd...)</span>
+      <span class="action-new">Foiling Status</span>
+      <span class="action-new">Lead (time gap)</span>
+      <span class="action-new">Mark Type</span>
+    </div>
+    <p style="font-size:0.85rem;color:var(--gray);margin-top:0.5rem;">These additions transform a generic "rounding" action into a rich contextual event usable for Stories and automated highlights.</p>
+  </div>
+
+  <div class="card">
+    <h3>SMT Implementation Notes</h3>
+    <ul>
+      <li><strong>Actions</strong>: Add via SMT &#8594; Actions &amp; Parameters &#8594; New Action. For most, no code required if using existing Resolver.</li>
+      <li><strong>Parameters</strong>: Add via pencil icon on action &#8594; Add Parameter. Type = Enumeration/Boolean/Numeric.</li>
+      <li><strong>Foiling Moment</strong>: Can be algorithm-driven if telemetry speed data is available (speed &gt; 40 knots + foil height &gt; 0 = auto-tag).</li>
+      <li><strong>Lead Change</strong>: Can be derived from Mark Rounding position changes &mdash; no new data needed if positions are captured.</li>
+      <li><strong>Confirm with Tal Kalderon</strong> on ResolverType=YachtSailing capacity to handle new action types without a new resolver build.</li>
+    </ul>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('current-state')">&#8592; Current State</a>
+    <a class="page-nav-btn" onclick="showPage('autotag')">Next: Auto-tag Opportunities &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Auto-tag Opportunities -->
+<div class="page" id="autotag">
+  <div class="page-header">
+    <h2>&#128247; Auto-tag &amp; Screen Detection Opportunities</h2>
+    <div class="teal-tldr">TL;DR &mdash; High auto-tag potential for foiling, capsizes, lead changes, and speed records using a combination of telemetry data and broadcast CV. America's Cup has the richest data feed in sailing.</div>
+    <p>What can WSC auto-detect from America's Cup broadcasts and data without human tagging</p>
+  </div>
+
+  <div class="card sailing">
+    <h3>What America's Cup Data Feed Provides</h3>
+    <p>The official America's Cup operates an advanced live dashboard with real-time race data. This data infrastructure is unique in sailing:</p>
+    <table>
+      <tr><th>Data Field</th><th>Available?</th><th>Auto-tag Use Case</th><th>Feasibility</th></tr>
+      <tr><td>Boat position (GPS)</td><td>&#10004; Real-time</td><td>Mark roundings, lead changes, crossings</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td>SOG (Speed Over Ground)</td><td>&#10004; Real-time</td><td>Foiling detection, speed records</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td>VMG (Velocity Made Good)</td><td>&#10004; Real-time</td><td>Performance efficiency highlights</td><td>&#11088;&#11088;&#11088;</td></tr>
+      <tr><td>TWS / TWD (Wind speed/direction)</td><td>&#10004; Real-time (LiDAR)</td><td>Contextual highlight enrichment</td><td>&#11088;&#11088;</td></tr>
+      <tr><td>Tack / Gybe counts</td><td>&#10004; Post-race leg data</td><td>Tacking duel highlights</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td>Penalty flags</td><td>&#10004; Umpire data</td><td>Penalty action auto-tag</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td>Race position by leg</td><td>&#10004; At mark roundings</td><td>Position-based action enrichment</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td>Start line timing / OCS</td><td>&#10004; Transponder</td><td>OCS auto-detection</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td>Foil height (telemetry)</td><td>&#10004; Boat sensors (100+)</td><td>Foiling status parameter</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
+    </table>
+    <p style="font-size:0.82rem;color:var(--gray);margin-top:0.5rem;">Source: Official America's Cup Advanced Dashboard, SailGP LiveLine architecture</p>
+  </div>
+
+  <div class="card">
+    <h3>On-Screen Elements: Auto-tag via Computer Vision</h3>
+    <p>What WSC's broadcast processing pipeline could detect automatically from the video stream:</p>
+    <table>
+      <tr><th>On-Screen Element</th><th>Detection Method</th><th>Priority</th><th>Status</th></tr>
+      <tr><td>&#9874; <strong>Speedometer overlay</strong></td><td>OCR on broadcast graphics (speed shown in knots on-screen)</td><td>High</td><td>Feasible if overlay is consistent</td></tr>
+      <tr><td>&#127937; <strong>Lead indicator</strong></td><td>Position gap graphic often shown on broadcast HUD</td><td>High</td><td>Feasible (AC broadcasts have consistent graphics)</td></tr>
+      <tr><td>&#128308; <strong>Penalty flag (red card)</strong></td><td>Color detection + broadcast graphic (yellow penalty flag shown)</td><td>High</td><td>Feasible</td></tr>
+      <tr><td>&#9973;&#65039; <strong>Foiling detection</strong></td><td>Hull-to-water gap detection (boat visibly out of water)</td><td>High</td><td>CV model training required</td></tr>
+      <tr><td>&#128680; <strong>Capsize detection</strong></td><td>Boat orientation anomaly (mast horizontal/inverted)</td><td>High</td><td>Rare event, CV training feasible</td></tr>
+      <tr><td>&#9654;&#65039; <strong>Replay indicator</strong></td><td>Standard replay graphic detection</td><td>Medium</td><td>Already supported in WSC platform</td></tr>
+      <tr><td>&#128200; <strong>Leaderboard graphic</strong></td><td>OCR on broadcast leaderboard for position/score</td><td>Medium</td><td>Feasible with AC's standardized broadcast</td></tr>
+      <tr><td>&#128064; <strong>Tacking duel</strong></td><td>Rapid boat course change detection (heading change frequency)</td><td>Medium</td><td>Requires telemetry + CV fusion</td></tr>
+    </table>
+  </div>
+
+  <div class="card sailing">
+    <h3>Auto-tag Architecture for America's Cup</h3>
+    <div class="highlight">
+      <strong>Best approach:</strong> Telemetry-first, CV-assist. America's Cup has the richest data infrastructure in sailing. If WSC can access the official AC live data feed (or OBS_Sailing equivalent), automatic tagging of 60-70% of key moments becomes feasible.
+    </div>
+    <table>
+      <tr><th>Action</th><th>Detection Source</th><th>Confidence</th></tr>
+      <tr><td>Foiling Moment</td><td>Boat speed &gt; 38 knots AND foil height sensor &gt; 0</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Very High</td></tr>
+      <tr><td>Lead Change</td><td>Position data: boat A was behind, now ahead at mark</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Very High</td></tr>
+      <tr><td>Penalty / Spin</td><td>Official umpire feed + heading change &gt; 360&#176; in short time</td><td>&#11088;&#11088;&#11088;&#11088; High</td></tr>
+      <tr><td>OCS / False Start</td><td>Transponder data: boat over line before start signal</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Very High</td></tr>
+      <tr><td>Mark Rounding</td><td>GPS proximity to mark coordinates</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Very High</td></tr>
+      <tr><td>Speed Record</td><td>Max SOG value in race telemetry</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Very High</td></tr>
+      <tr><td>Capsize</td><td>Inertial sensor anomaly (requires boat telemetry access)</td><td>&#11088;&#11088;&#11088; Medium (rare event)</td></tr>
+      <tr><td>Tack / Gybe</td><td>Heading change + wind angle crossing 0&#176; / 180&#176;</td><td>&#11088;&#11088;&#11088;&#11088; High (with telemetry)</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Recommendation: How to Access the Data</h3>
+    <ol>
+      <li><strong>Step 1</strong>: Confirm whether the existing <code>OBS_Sailing</code> IngestionManager can connect to America's Cup official live API. Escalate to Tal Kalderon for feasibility check.</li>
+      <li><strong>Step 2</strong>: Contact DataSportsGroup (DSG) &mdash; they have a Sailing API. Check if America's Cup 38th edition is covered.</li>
+      <li><strong>Step 3</strong>: Evaluate whether the America's Cup official data feed is available to media partners / broadcasters. America's Cup has an official Advanced Dashboard with real-time APIs.</li>
+      <li><strong>Step 4</strong>: For Preliminary Regattas (2026), use manual tagging. Collect a sample of broadcast video to prototype CV detection for Foiling and Lead Change.</li>
+    </ol>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('actions')">&#8592; Actions &amp; Enhancements</a>
+    <a class="page-nav-btn" onclick="showPage('stories')">Next: In-App Stories &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: In-App Stories -->
+<div class="page" id="stories">
+  <div class="page-header">
+    <h2>&#128218; In-App Stories for Yacht Sailing</h2>
+    <div class="teal-tldr">TL;DR &mdash; Stories containers are missing entirely. High value for America's Cup: race-by-race narrative, speed stats, lead changes. Stories containers can be added in Buster (no code). Story content needs enhanced actions first.</div>
+    <p>How to enable in-app Stories for America's Cup content</p>
+  </div>
+
+  <div class="card alert">
+    <h3>&#10060; What's Missing Today</h3>
+    <p>Currently, Yacht Sailing has <strong>zero Stories containers</strong> configured. The following are all absent:</p>
+    <ul>
+      <li>Race Stories (Game Stories)</li>
+      <li>Player Stories</li>
+      <li>Team Stories</li>
+      <li>Action Stories</li>
+    </ul>
+    <p style="margin-top:0.5rem;">This means even if content is tagged, there is no in-app stories output for sailing clients.</p>
+  </div>
+
+  <div class="card sailing">
+    <h3>Stories Container Plan</h3>
+    <table>
+      <tr><th>Container</th><th>Content Idea</th><th>Actions Required</th><th>Priority</th><th>Buster or Code?</th></tr>
+      <tr><td><strong>Race Stories</strong></td><td>"Race 3 Recap" &mdash; key moments from a single race as a story carousel</td><td>All 5 current + 10 new</td><td><strong>P0</strong></td><td>Buster (no code)</td></tr>
+      <tr><td><strong>Team Stories</strong></td><td>"Emirates Team NZ &mdash; Race Day 1" &mdash; all moments for one team</td><td>Mark Rounding + Lead Change + Finish</td><td><strong>P0</strong></td><td>Buster (no code)</td></tr>
+      <tr><td><strong>Action Stories (Speed)</strong></td><td>"Top 5 Speeds of the Day" &mdash; boat speed records across all races</td><td>Speed Record (new), Foiling Moment (new)</td><td><strong>P1</strong></td><td>Buster + new actions</td></tr>
+      <tr><td><strong>Action Stories (Penalty)</strong></td><td>"All Penalties Today" &mdash; every spin/infringement across the regatta</td><td>Penalty / Spin (new)</td><td><strong>P1</strong></td><td>Buster + new actions</td></tr>
+      <tr><td><strong>Player Stories</strong></td><td>Sailor spotlight &mdash; if player-level attribution exists</td><td>All actions with player attribution</td><td><strong>P2</strong></td><td>Buster (no code)</td></tr>
+      <tr><td><strong>Action Stories (Lead Changes)</strong></td><td>"All Lead Changes" &mdash; every overtake in the regatta</td><td>Lead Change (new)</td><td><strong>P1</strong></td><td>Buster + new action</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Story Narratives: America's Cup</h3>
+    <p>Here are the most compelling story types for AC fans:</p>
+    <div class="grid-2">
+      <div>
+        <h4>Per-Race Stories</h4>
+        <ul>
+          <li><strong>"Race Recap"</strong> &mdash; Start &#8594; Mark 1 &#8594; Lead Change &#8594; Finish</li>
+          <li><strong>"Speed of the Race"</strong> &mdash; fastest moment highlighted</li>
+          <li><strong>"The Turning Point"</strong> &mdash; when the race was decided (lead change)</li>
+          <li><strong>"Penalty Drama"</strong> &mdash; infringement moment and consequence</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Cross-Race Stories</h4>
+        <ul>
+          <li><strong>"Day in Review"</strong> &mdash; compiled highlights across all races on a day</li>
+          <li><strong>"Series Standings"</strong> &mdash; score after each race day</li>
+          <li><strong>"Fastest Boats Today"</strong> &mdash; top speeds leaderboard</li>
+          <li><strong>"Incident File"</strong> &mdash; all capsizes, penalties, close calls</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Implementation Prerequisites</h3>
+    <ol>
+      <li><strong>Add new actions first</strong> (Tack, Gybe, Penalty, Lead Change, Foiling Moment, Speed Record) &mdash; Stories content quality depends on action richness</li>
+      <li><strong>Add Stories containers in Buster</strong> &mdash; Race Stories and Team Stories can be done without code changes</li>
+      <li><strong>Configure AVGen rules</strong> for Stories &mdash; define trigger conditions per story type</li>
+      <li><strong>Test with Regatta 1</strong> (May 2026) as first live Stories test</li>
+    </ol>
+    <div class="highlight">
+      <strong>Quick win:</strong> Race Stories + Team Stories containers can be added in Buster in less than 1 day by a PM working with Ops. No dev ticket needed. Do this immediately.
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('autotag')">&#8592; Auto-tag Opportunities</a>
+    <a class="page-nav-btn" onclick="showPage('providers')">Next: Data Providers &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Data Providers -->
+<div class="page" id="providers">
+  <div class="page-header">
+    <h2>&#128225; Data Providers</h2>
+    <div class="teal-tldr">TL;DR &mdash; 3 potential sources: OBS_Sailing (exists in WSC, unknown AC coverage), DSG Sailing API (comprehensive, covers some events), official AC live data (richest but requires access agreement). None are connected today.</div>
+    <p>Assessment of available data providers for Yacht Sailing ingestion</p>
+  </div>
+
+  <div class="card">
+    <h3>Provider Landscape</h3>
+    <table>
+      <tr><th>Provider</th><th>Coverage</th><th>Protocol</th><th>Status</th><th>WSC Readiness</th></tr>
+      <tr>
+        <td><strong>OBS (Olympic Broadcasting Services) &mdash; Sailing</strong></td>
+        <td>Olympic Sailing, potentially World Sailing events</td>
+        <td>OBS proprietary feed</td>
+        <td><span class="badge badge-orange">Configured, not connected to AC</span></td>
+        <td>IngestionManager=OBS_Sailing already exists in WSC. Needs feed access for AC events.</td>
+      </tr>
+      <tr>
+        <td><strong>DataSportsGroup (DSG) Sailing API</strong></td>
+        <td>Olympics, European Championships, World Sailing Grand Slam</td>
+        <td>REST API, JSON</td>
+        <td><span class="badge badge-gray">Not integrated</span></td>
+        <td>DSG is a known provider. Need to check if America's Cup 38 is in their catalog. DSG has sailing API at dsg-api.com/sailing/.</td>
+      </tr>
+      <tr>
+        <td><strong>Official America's Cup Live Data</strong></td>
+        <td>All AC38 events (full race telemetry)</td>
+        <td>AC proprietary API / Advanced Dashboard</td>
+        <td><span class="badge badge-gray">No access agreement</span></td>
+        <td>Richest possible feed. Requires commercial relationship with America's Cup Event Ltd. AC has official Advanced Dashboard with real-time position, speed, wind data.</td>
+      </tr>
+      <tr>
+        <td><strong>SailGP / Oracle Cloud</strong></td>
+        <td>SailGP F50 series (10+ global events)</td>
+        <td>Oracle REST Data Services</td>
+        <td><span class="badge badge-gray">Not evaluated</span></td>
+        <td>SailGP is a separate series from America's Cup but uses same boat class (F50). Separate commercial path. Long-term opportunity.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card sailing">
+    <h3>Provider Deep Dive: OBS_Sailing (Existing Asset)</h3>
+    <div class="highlight">
+      This is WSC's most immediately actionable asset. The <code>OBS_Sailing</code> IngestionManager is already configured on all 5 Yacht Sailing systems. The question is: what events does it cover, and can it reach America's Cup?
+    </div>
+    <p><strong>Action items:</strong></p>
+    <ol>
+      <li>Ask Tal Kalderon / the ingestion team: what data does OBS_Sailing currently ingest?</li>
+      <li>Check if OBS has an agreement with America's Cup Event Ltd for data rights</li>
+      <li>OBS typically covers Olympic sailing only &mdash; AC is not Olympic. May require separate connection.</li>
+      <li>If OBS doesn't cover AC, can the same ingestion infrastructure connect to DSG or AC official feed?</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Data Field Availability Assessment</h3>
+    <table>
+      <tr><th>Data Field</th><th>OBS_Sailing</th><th>DSG API</th><th>AC Official</th><th>Needed For</th></tr>
+      <tr><td>Race position by leg</td><td>&#10003; (Olympics)</td><td>&#10003;</td><td>&#10003;</td><td>Mark Rounding, Lead Change</td></tr>
+      <tr><td>Boat speed (SOG)</td><td>&#10003; (Olympics)</td><td>&#10007;</td><td>&#10003;</td><td>Foiling Moment, Speed Record</td></tr>
+      <tr><td>Penalty events</td><td>&#10003;</td><td>&#10007;</td><td>&#10003;</td><td>Penalty / Spin</td></tr>
+      <tr><td>Tack/Gybe events</td><td>&#10003;</td><td>&#10007;</td><td>&#10003;</td><td>Tack, Gybe actions</td></tr>
+      <tr><td>OCS (false start)</td><td>&#10003;</td><td>&#10007;</td><td>&#10003;</td><td>OCS action</td></tr>
+      <tr><td>GPS position (real-time)</td><td>&#10003;</td><td>Partial</td><td>&#10003;</td><td>Crossing, Lead Change</td></tr>
+      <tr><td>Player/crew attribution</td><td>Partial</td><td>&#10003;</td><td>&#10003;</td><td>Player Highlights, Stories</td></tr>
+      <tr><td>Foil height / telemetry</td><td>&#10007;</td><td>&#10007;</td><td>&#10003;</td><td>Foiling Moment (precise)</td></tr>
+    </table>
+    <p style="font-size:0.82rem;color:var(--gray);margin-top:0.5rem;">DSG API field availability for America's Cup specifically is TBD &mdash; requires a discovery call with DSG.</p>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('stories')">&#8592; In-App Stories</a>
+    <a class="page-nav-btn" onclick="showPage('broadcast')">Next: Broadcast Use Cases &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Broadcast Use Cases -->
+<div class="page" id="broadcast">
+  <div class="page-header">
+    <h2>&#127916; Broadcast Use Cases</h2>
+    <div class="teal-tldr">TL;DR &mdash; America's Cup is broadcast-first sport with premium production. High demand for short-form highlights, speed/data overlays, per-race recaps. Young audience skews digital-first, ideal for Stories/Bites format.</div>
+    <p>Content opportunities and use cases for Yacht Sailing broadcast clients</p>
+  </div>
+
+  <div class="card sailing">
+    <h3>Broadcast Content Opportunities</h3>
+    <ul>
+      <li><strong>Race Recap (60-90s)</strong> &mdash; Auto-generated highlight reel from each individual race. Start &#8594; Tacking duel &#8594; Mark Rounding &#8594; Lead Change &#8594; Finish. Perfect for social media.</li>
+      <li><strong>Speed Highlight</strong> &mdash; Clip of highest-speed moment in race with speed overlay graphic. AC75 at 50+ knots is visually stunning. Short-form shareable content.</li>
+      <li><strong>Penalty Drama</strong> &mdash; The moment a penalty is called + the spin execution. Race-defining, high emotion.</li>
+      <li><strong>Start Line Highlights</strong> &mdash; Pre-start tactical maneuvering. Often the most strategic and dramatic part of the race for sailing experts.</li>
+      <li><strong>Lead Change Compilation</strong> &mdash; All lead changes across a day of racing. Tells the story of who dominated.</li>
+      <li><strong>Day in Review</strong> &mdash; Compiled highlights across all races on a single day. Multi-race content for evening broadcast recaps.</li>
+      <li><strong>Team Performance Story</strong> &mdash; "Emirates Team NZ won 3 races today" &mdash; team-centric content for national/team fan bases.</li>
+      <li><strong>Foiling Moments</strong> &mdash; Compilation of the most spectacular foiling sequences. Very visual, zero context needed. Instagram/TikTok ready.</li>
+      <li><strong>Pre-race Atmosphere</strong> &mdash; Crowd, boats, conditions. Contextual content for broadcast opening segments.</li>
+      <li><strong>Incident Report</strong> &mdash; Capsizes, gear failures, close calls. Rare but viral content with broad appeal beyond sailing fans.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Audience Profile</h3>
+    <div class="grid-2">
+      <div>
+        <h4>Demographics</h4>
+        <ul>
+          <li>Core: Sailing enthusiasts, 35-65 years old, affluent</li>
+          <li>Growing: Young digital-first audience attracted by foiling/speed spectacle</li>
+          <li>Geographic: Strong in NZ, USA, UK, Italy, France, Switzerland</li>
+          <li>Premium: America's Cup audience is high-income, tech-savvy</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Content Preferences</h4>
+        <ul>
+          <li>Speed and technology-focused highlights</li>
+          <li>Short clips for social sharing (30-60s ideal)</li>
+          <li>Data overlays (speed, position, wind) highly valued</li>
+          <li>Stories format: perfect for pre-race to finish narrative</li>
+          <li>Multi-language demand (English, Italian, French, Spanish)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Why America's Cup is Unique for WSC</h3>
+    <table>
+      <tr><th>Dimension</th><th>America's Cup</th><th>Other Sailing</th></tr>
+      <tr><td>Event prestige</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Oldest international sporting trophy (1851)</td><td>&#11088;&#11088;&#11088; Varies</td></tr>
+      <tr><td>Broadcast quality</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; 4K, HDR, aerial, drone, chase boat</td><td>&#11088;&#11088;&#11088; Standard</td></tr>
+      <tr><td>Data richness</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Real-time telemetry, 100+ sensors per boat</td><td>&#11088;&#11088; GPS only</td></tr>
+      <tr><td>Commercial value</td><td>&#11088;&#11088;&#11088;&#11088; Premium rights holders, major sponsors</td><td>&#11088;&#11088;&#11088; Moderate</td></tr>
+      <tr><td>Content volume</td><td>&#11088;&#11088; Low (91 races over 14 months)</td><td>&#11088;&#11088;&#11088; Medium</td></tr>
+      <tr><td>Digital audience</td><td>&#11088;&#11088;&#11088;&#11088; 220 countries, streaming-first</td><td>&#11088;&#11088; Limited</td></tr>
+    </table>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('providers')">&#8592; Data Providers</a>
+    <a class="page-nav-btn" onclick="showPage('sol-a')">Next: Solution A &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Solution A -->
+<div class="page" id="sol-a">
+  <div class="page-header">
+    <h2><span style="color:var(--blue);">A</span> Solution A &mdash; Manual MVP + Sport Model Enhancement</h2>
+    <div class="tldr">TL;DR &mdash; Do it now. Zero dev needed for Regatta 1. Enhance sport model (2 sprints). Manual ops for 2026. Evaluate ingestion mid-2026 before LVC build decision.</div>
+    <p>Immediate path: enhance the model, run manual, collect data, decide on ingestion later</p>
+  </div>
+
+  <div class="card sol-a">
+    <h3>What This Involves</h3>
+    <div class="grid-2">
+      <div>
+        <h4>Phase 1: Now (2-3 weeks)</h4>
+        <ul>
+          <li>Add 10 new actions in SMT (Tack, Gybe, Penalty, Lead Change, Foiling Moment, etc.)</li>
+          <li>Add 10 new parameters to existing + new actions</li>
+          <li>Add Stories containers in Buster (Race Stories, Team Stories)</li>
+          <li>Update tagging guide for operators</li>
+          <li>Confirm with Tal: ResolverType can handle new actions</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Phase 2: May&ndash;Dec 2026 (Manual)</h4>
+        <ul>
+          <li>Manual tagging for all 3 Preliminary Regattas</li>
+          <li>~1.5 hrs/race, ~$15/race, ~$360 total for 2026</li>
+          <li>Collect content quality feedback from client</li>
+          <li>Identify which actions operators tag most</li>
+          <li>Benchmark: are Stories generating client value?</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:1rem;">
+      <h4>Phase 3: Q1 2027 (Ingestion Decision Gate)</h4>
+      <ul>
+        <li>Based on Phase 2 feedback + data quality: decide whether to build ingestion for LVC/Match</li>
+        <li>If yes: open engineering ticket (3-month build, target: ready for LVC May 2027)</li>
+        <li>If no: continue manual for full campaign (total cost: ~$1,365)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card sol-a">
+    <h3>Effort Estimate</h3>
+    <table>
+      <tr><th>Work Stream</th><th>Who</th><th>Effort</th><th>Cost</th></tr>
+      <tr><td>SMT: Add new actions + parameters</td><td>PM (Manor) + SMT config</td><td>2-3 days</td><td class="money">$0 (PM time)</td></tr>
+      <tr><td>Buster: Add Stories containers</td><td>PM (Manor) + Ops</td><td>1 day</td><td class="money">$0 (PM time)</td></tr>
+      <tr><td>Tagging guide update</td><td>PM (Manor)</td><td>1-2 days</td><td class="money">$0 (PM time)</td></tr>
+      <tr><td>Ops manual tagging (2026 Regattas)</td><td>Ops team</td><td>~24 hrs total (16 races)</td><td class="money">~$360</td></tr>
+      <tr><td>Ops manual tagging (full campaign)</td><td>Ops team</td><td>~136 hrs total</td><td class="money">~$1,365 total</td></tr>
+      <tr class="money-row"><td><strong>Total dev cost (Phase 1)</strong></td><td>&mdash;</td><td>&mdash;</td><td class="money"><strong>$0 dev sprints</strong></td></tr>
+    </table>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3 class="pro">&#10003; Pros</h3>
+      <ul>
+        <li>Ready for Regatta 1 in May 2026 (only viable option)</li>
+        <li>Zero engineering sprints in Phase 1</li>
+        <li>Model enhancements benefit ALL sailing events (Dakar YOG, Olympics)</li>
+        <li>Low financial risk: ~$1.4K total ops cost</li>
+        <li>Stories containers add client value immediately</li>
+        <li>Allows data collection before committing to ingestion investment</li>
+        <li>Preserves optionality &mdash; can upgrade to ingestion in Phase 3</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 class="con">&#10007; Cons</h3>
+      <ul>
+        <li>Content generation is not real-time (ops lag)</li>
+        <li>No automated highlights during live race</li>
+        <li>Scales linearly with race volume (LVC has ~40 races)</li>
+        <li>Manual tagging quality variance (operator skill)</li>
+        <li>No speed/telemetry data without ingestion</li>
+        <li>Foiling Moment and Lead Change are harder to tag accurately without data</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('broadcast')">&#8592; Broadcast Use Cases</a>
+    <a class="page-nav-btn" onclick="showPage('sol-b')">Next: Solution B &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Solution B -->
+<div class="page" id="sol-b">
+  <div class="page-header">
+    <h2><span style="color:var(--green);">B</span> Solution B &mdash; Full Ingestion + Enhanced Model</h2>
+    <div class="tldr">TL;DR &mdash; 3-4 months to build. ~$45-90K dev cost. Not feasible for 2026 Regattas. Ideal if data provider confirmed + client deal signed for LVC 2027. Builds on existing OBS_Sailing infrastructure.</div>
+    <p>Full automated ingestion from America's Cup data feed + enriched sport model</p>
+  </div>
+
+  <div class="card sol-b">
+    <h3>Architecture Overview</h3>
+    <p>This builds on the existing <code>OBS_Sailing</code> IngestionManager infrastructure. The key question is data access, not build complexity.</p>
+    <table>
+      <tr><th>Component</th><th>What Gets Built</th><th>Existing Asset?</th></tr>
+      <tr><td>Data Reader</td><td>API connection to AC official data feed / DSG Sailing</td><td>OBS_Sailing reader exists, needs new endpoint</td></tr>
+      <tr><td>Parser</td><td>Maps AC race events to WSC Mamba actions (Mark Rounding, Penalty, etc.)</td><td>Partial (OBS_Sailing parser exists for basic events)</td></tr>
+      <tr><td>Action Mapping</td><td>AC event types &#8594; 15 new WSC actions with parameters</td><td>New work required</td></tr>
+      <tr><td>Position Engine</td><td>GPS position data &#8594; Lead Change / Crossing detection</td><td>New work required</td></tr>
+      <tr><td>Speed Engine</td><td>SOG data &#8594; Foiling Moment / Speed Record auto-tag</td><td>New work required</td></tr>
+      <tr><td>SMT Model</td><td>10 new actions + 10 parameters (same as Solution A)</td><td>New work (same as Sol A)</td></tr>
+      <tr><td>Stories Containers</td><td>Race Stories, Team Stories, Action Stories</td><td>New (same as Sol A)</td></tr>
+    </table>
+  </div>
+
+  <div class="card sol-b">
+    <h3>Effort Estimate (Historical Baseline Applied)</h3>
+    <table>
+      <tr><th>Work Stream</th><th>People</th><th>Duration</th><th>Sprints</th><th>Cost</th></tr>
+      <tr><td>Data connection + Reader (new provider endpoint)</td><td>1 dev</td><td>3-4 weeks</td><td>2</td><td class="money">~$30K</td></tr>
+      <tr><td>Parser + Action Mapping (15 actions)</td><td>1 dev</td><td>3-4 weeks</td><td>2</td><td class="money">~$30K</td></tr>
+      <tr><td>Position Engine (Lead Change, Crossing)</td><td>1 dev</td><td>2-3 weeks</td><td>1-2</td><td class="money">~$15-22K</td></tr>
+      <tr><td>SMT + Buster + Stories config (PM)</td><td>PM</td><td>2-3 days</td><td>&mdash;</td><td class="money">$0</td></tr>
+      <tr><td>Testing + QA</td><td>1 dev + QA</td><td>2 weeks</td><td>1</td><td class="money">~$15K</td></tr>
+      <tr class="money-row"><td><strong>Total</strong></td><td><strong>1-2 devs</strong></td><td><strong>~3-4 months calendar</strong></td><td><strong>6-8 sprints</strong></td><td class="money"><strong>~$75-97K</strong></td></tr>
+    </table>
+    <p style="font-size:0.82rem;color:var(--gray);margin-top:0.5rem;">Dan Dragucki baseline: "3 months with ingestion" for a medium-complexity new sport. Yacht Sailing has existing infrastructure, suggesting 2.5-3 months neto is realistic.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3 class="pro">&#10003; Pros</h3>
+      <ul>
+        <li>Real-time content generation during races</li>
+        <li>Automated Foiling Moments, Speed Records, Lead Changes (highest-value clips)</li>
+        <li>Scales to all 91 races at zero additional ops cost</li>
+        <li>OBS_Sailing infrastructure already exists &mdash; reduces new build effort</li>
+        <li>Positions WSC as the only automated sailing highlight platform</li>
+        <li>Speed/telemetry data enables unique data-driven content</li>
+        <li>Stories become automatically generated</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 class="con">&#10007; Cons</h3>
+      <ul>
+        <li>Not feasible for Preliminary Regatta 1 (May 2026)</li>
+        <li>~$75-97K engineering investment</li>
+        <li>Data access agreement required (AC official or DSG) &mdash; TBD cost</li>
+        <li>If data access unavailable, entire build is blocked</li>
+        <li>High risk if no signed client deal justifies investment</li>
+        <li>3-month lead time means decision needed by <strong>February 2027</strong> for LVC readiness</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Prerequisites for Solution B</h3>
+    <ul>
+      <li>&#9989; Confirm data provider covers America's Cup 38 events (DSG or AC official)</li>
+      <li>&#9989; Signed client deal or strong contractual commitment justifying investment</li>
+      <li>&#9989; Dev team capacity (1-2 devs for 3 months)</li>
+      <li>&#9989; OBS_Sailing feasibility check with Tal Kalderon</li>
+      <li>&#9989; Data access agreement and API credentials</li>
+      <li>&#9989; Decision gate by: <strong>Q4 2026</strong> (to be ready for LVC May 2027)</li>
+    </ul>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('sol-a')">&#8592; Solution A</a>
+    <a class="page-nav-btn" onclick="showPage('sol-c')">Next: Solution C &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Solution C -->
+<div class="page" id="sol-c">
+  <div class="page-header">
+    <h2><span style="color:var(--purple);">C</span> Solution C &mdash; Status Quo (Not Recommended)</h2>
+    <div class="tldr">TL;DR &mdash; Keep current 5-action model, no Stories, no enhancements. Low effort but delivers poor content quality. Risks client satisfaction and misses the America's Cup window entirely.</div>
+    <p>Option to do nothing beyond current state &mdash; assessed for completeness</p>
+  </div>
+
+  <div class="card sol-c">
+    <h3>What This Means</h3>
+    <ul>
+      <li>Keep current 5 actions (Finish Won/Lost, Start, Mark Rounding x2)</li>
+      <li>No Stories containers added</li>
+      <li>No parameter enhancements</li>
+      <li>Operators tag races using only current actions</li>
+      <li>No Tack, Gybe, Penalty, Lead Change, Foiling Moment in content</li>
+    </ul>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3 class="pro">&#10003; Pros</h3>
+      <ul>
+        <li>Zero effort immediately</li>
+        <li>Content is still generated (basic highlights)</li>
+        <li>No risk of shipping bugs in new actions</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 class="con">&#10007; Cons</h3>
+      <ul>
+        <li>Content quality is very poor &mdash; only 5 actions, no Penalty or Lead Change</li>
+        <li>No Stories = misses key client deliverable requested in this analysis</li>
+        <li>Doesn't capture the defining moments of sailing (foiling, speed, tactics)</li>
+        <li>Misses Dakar 2026 YOG opportunity for shared improvement</li>
+        <li>Client experience risk during America's Cup campaign</li>
+        <li>No differentiation from any other sailing content platform</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>When to Consider C</h3>
+    <p>Only if: there is <strong>no signed or near-signed America's Cup client deal</strong> AND <strong>no Dakar 2026 YOG scope</strong> that benefits from enhancements. Even in this scenario, adding Stories containers (zero dev) is still worthwhile.</p>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('sol-b')">&#8592; Solution B</a>
+    <a class="page-nav-btn" onclick="showPage('historical')">Next: Historical Evidence &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Historical Evidence -->
+<div class="page" id="historical">
+  <div class="page-header">
+    <h2>&#128200; Historical Evidence &amp; Engineering Baselines</h2>
+    <div class="tldr">TL;DR &mdash; Engineering baselines: 6 weeks neto new sport (Shahar), 3 months with ingestion (Dan). OBS_Sailing existing = ~30% effort reduction. Manual remains cheapest validation tool.</div>
+    <p>Canonical engineering estimates and precedents from WSC leadership</p>
+  </div>
+
+  <div class="card">
+    <h3>&#128218; WSC Engineering Baselines (Canonical)</h3>
+    <table>
+      <tr><th>Source</th><th>Estimate</th><th>Context</th></tr>
+      <tr><td><strong>Shahar Cohen</strong> (Nov 2023)</td><td><span class="money">6 weeks neto</span> for a new sport. <span class="money">+2 weeks</span> for a new data connection format.</td><td>"Neto time, considering a developer working 100% of their time, which is usually not the case."</td></tr>
+      <tr><td><strong>Dan Dragucki</strong> (Jan 2025)</td><td><span class="money">1.5&ndash;2 months</span> without ingestion. <span class="money">3 months</span> with ingestion.</td><td>FIS Skiing estimate &mdash; representative of medium-complexity new sport.</td></tr>
+      <tr><td><strong>Shahar Cohen</strong> (May 2023)</td><td><span class="money">3&ndash;4 weeks including testing</span> for a sub-sport.</td><td>Badminton &amp; Table Tennis estimate.</td></tr>
+      <tr><td><strong>Manual clipping baseline</strong></td><td><span class="money">$10/hr</span> per operator. ~1.5 hrs per race.</td><td>Industry standard for WSC ops workers.</td></tr>
+      <tr><td><strong>Sprint cost baseline</strong></td><td><span class="money">~$15K/sprint</span></td><td>Used to convert sprint estimates to dollar cost.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Applied to Yacht Sailing</h3>
+    <table>
+      <tr><th>Scenario</th><th>Neto Time</th><th>Calendar Time</th><th>Dev Cost (est.)</th></tr>
+      <tr><td>Sport model enhancement only (Sol A Phase 1)</td><td>0 dev sprints (PM config)</td><td>2-3 weeks</td><td class="money">$0</td></tr>
+      <tr><td>Stories containers (Buster, no code)</td><td>0 dev sprints</td><td>1-2 days</td><td class="money">$0</td></tr>
+      <tr><td>New ingestion connection (existing OBS_Sailing base)</td><td>~4-5 weeks neto</td><td>~2.5-3 months calendar</td><td class="money">~$45-60K</td></tr>
+      <tr><td>Full ingestion + position engine + auto-tag</td><td>~6-8 weeks neto</td><td>~3-4 months calendar</td><td class="money">~$75-97K</td></tr>
+    </table>
+    <div class="highlight">
+      <strong>Key insight:</strong> Because OBS_Sailing IngestionManager already exists, the ingestion build for America's Cup is closer to Shahar's "sub-sport" estimate (3-4 weeks neto) than a full new sport (6 weeks neto). Calendar time remains 3 months due to parallel developer workload.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Precedent: Sport Model Enhancement vs New Build</h3>
+    <table>
+      <tr><th>Sport</th><th>Enhancement Type</th><th>Dev Effort</th><th>Outcome</th></tr>
+      <tr><td>NRL (Rugby League)</td><td>Sub-sport of Rugby</td><td>~3-5 sprints</td><td>Live and operational</td></tr>
+      <tr><td>Badminton &amp; Table Tennis</td><td>New sport type</td><td>3-4 weeks incl. testing</td><td>Live and operational</td></tr>
+      <tr><td>AFL (Aussie Rules)</td><td>New standalone sport</td><td>6-8 sprints</td><td>Live and operational</td></tr>
+      <tr><td>Athletics</td><td>New standalone sport</td><td>6-8 sprints</td><td>Live and operational</td></tr>
+      <tr><td><strong>Yacht Sailing model enhancement</strong></td><td>SMT config + Buster only</td><td>~0 dev sprints</td><td>Target: 2-3 weeks</td></tr>
+    </table>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('sol-c')">&#8592; Solution C</a>
+    <a class="page-nav-btn" onclick="showPage('comparison')">Next: Comparison Table &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Comparison -->
+<div class="page" id="comparison">
+  <div class="page-header">
+    <h2>&#9878;&#65039; Solution Comparison</h2>
+    <div class="tldr">TL;DR &mdash; Solution A wins for 2026. Solution B is the right build if a deal materializes for LVC/Match 2027. Solution C should not be chosen.</div>
+    <p>Side-by-side evaluation of all three solutions</p>
+  </div>
+
+  <div class="card">
+    <h3>Full Comparison Matrix</h3>
+    <table>
+      <tr><th>Dimension</th><th>A: Manual + Enhance</th><th>B: Ingest + Enhance</th><th>C: Status Quo</th></tr>
+      <tr><td><strong>Dev Effort</strong></td><td><span class="badge badge-green">0 sprints</span></td><td><span class="badge badge-orange">6-8 sprints</span></td><td><span class="badge badge-green">0 sprints</span></td></tr>
+      <tr><td><strong>Calendar Time</strong></td><td><span class="badge badge-green">2-3 weeks (model)</span></td><td><span class="badge badge-orange">3-4 months</span></td><td><span class="badge badge-green">0 (nothing changes)</span></td></tr>
+      <tr><td><strong>Ready for Regatta 1 (May 2026)</strong></td><td><span class="badge badge-green">&#10004; Yes</span></td><td><span class="badge badge-red">&#10007; No</span></td><td><span class="badge badge-orange">Barely (poor quality)</span></td></tr>
+      <tr><td><strong>Actions Available</strong></td><td>15 actions</td><td>15 actions + auto-tag</td><td>5 actions</td></tr>
+      <tr><td><strong>In-App Stories</strong></td><td><span class="badge badge-orange">Manual-driven</span></td><td><span class="badge badge-green">Auto-generated</span></td><td><span class="badge badge-red">None</span></td></tr>
+      <tr><td><strong>Foiling Moments</strong></td><td>Manual tag (harder)</td><td>Auto-detected</td><td>Not supported</td></tr>
+      <tr><td><strong>Lead Change</strong></td><td>Manual tag (hard)</td><td>Auto-detected</td><td>Not supported</td></tr>
+      <tr><td><strong>Real-time Content</strong></td><td><span class="badge badge-red">No</span></td><td><span class="badge badge-green">Yes</span></td><td><span class="badge badge-red">No</span></td></tr>
+      <tr><td><strong>Ops Cost (full campaign)</strong></td><td class="money">~$1,365</td><td class="money">~$0 (automated)</td><td class="money">~$1,365</td></tr>
+      <tr><td><strong>Dev Cost</strong></td><td class="money">$0</td><td class="money">~$75-97K</td><td class="money">$0</td></tr>
+      <tr><td><strong>Data Provider Risk</strong></td><td>None</td><td>HIGH (access TBD)</td><td>None</td></tr>
+      <tr><td><strong>Dakar 2026 YOG benefit</strong></td><td><span class="badge badge-green">Yes (shared model)</span></td><td><span class="badge badge-green">Yes (shared model)</span></td><td><span class="badge badge-red">No</span></td></tr>
+      <tr><td><strong>Content Quality</strong></td><td>Good (15 actions, no speed)</td><td>Excellent (auto-tag + speed data)</td><td>Poor (5 actions only)</td></tr>
+      <tr><td><strong>Recommended</strong></td><td><span class="badge badge-green">&#10004; Phase 1 YES</span></td><td><span class="badge badge-orange">Phase 3 IF deal signed</span></td><td><span class="badge badge-red">&#10007; Not recommended</span></td></tr>
+    </table>
+  </div>
+
+  <div class="card sailing">
+    <h3>Investment vs. Value Matrix</h3>
+    <table>
+      <tr><th>Solution</th><th>Engineering Investment</th><th>Time to Value</th><th>Value If No Deal</th><th>Value If Deal Signed</th></tr>
+      <tr><td><strong>A: Manual + Enhance</strong></td><td class="money">$0 dev</td><td>2-3 weeks</td><td>Low risk, some cost</td><td>Good content, some ops cost</td></tr>
+      <tr><td><strong>B: Ingest + Enhance</strong></td><td class="money">~$75-97K</td><td>3-4 months</td><td>Wasted investment</td><td>Excellent ROI, premium product</td></tr>
+      <tr><td><strong>C: Status Quo</strong></td><td class="money">$0</td><td>Now</td><td>Minimal ops cost</td><td>Poor client satisfaction</td></tr>
+    </table>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('historical')">&#8592; Historical Evidence</a>
+    <a class="page-nav-btn" onclick="showPage('recommendation')">Next: Recommendation &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: Recommendation -->
+<div class="page" id="recommendation">
+  <div class="page-header">
+    <h2>&#127919; Recommendation</h2>
+    <div class="teal-tldr">TL;DR &mdash; Start Sol A immediately (2-3 weeks), ship for Regatta 1 (May 2026). Evaluate Sol B in Q3 2026 based on deal pipeline. Add Stories containers NOW (zero dev).</div>
+    <p>Phased recommendation with decision gates and immediate next steps</p>
+  </div>
+
+  <div class="verdict">
+    <h3>Recommended Path: A &#8594; Evaluate B</h3>
+    <ol>
+      <li><strong>Phase 1 (NOW &mdash; 2-3 weeks)</strong>: Enhance sport model. Add 10 actions + 10 parameters in SMT. Add Stories containers in Buster. Update tagging guide. Confirm with Tal on resolver capacity.</li>
+      <li><strong>Phase 2 (May&ndash;Dec 2026)</strong>: Manual ops for all 3 Preliminary Regattas. ~$360 ops total. Validate content quality. Collect client feedback. Track which actions drive most client value.</li>
+      <li><strong>Phase 3 Decision Gate (Q3 2026)</strong>: If client deal is signed or near-signed for LVC/Match 2027 &rarr; proceed with Sol B ingestion build. Start build by Oct 2026 to be ready for LVC (May 2027). If no deal &rarr; continue manual for full campaign.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Pre-conditions (Before Architecture Decision)</h3>
+    <table>
+      <tr><th>Pre-condition</th><th>Owner</th><th>Deadline</th></tr>
+      <tr><td>Confirm data provider covers America's Cup 38 (DSG or AC official)</td><td>Manor + Tal Kalderon</td><td>May 2026</td></tr>
+      <tr><td>Confirm OBS_Sailing feed scope (does it cover AC events?)</td><td>Tal Kalderon</td><td>April 2026</td></tr>
+      <tr><td>Client deal pipeline for AC content (AM/DM alignment)</td><td>AM/DM owner</td><td>June 2026</td></tr>
+      <tr><td>Dakar 2026 YOG sailing scope confirmed</td><td>Dan Dragucki + Manor</td><td>May 2026</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Graduation Triggers: When to Move to Solution B</h3>
+    <table>
+      <tr><th>Trigger</th><th>Action</th></tr>
+      <tr><td>Signed client contract for LVC or AC Match coverage</td><td>Open Sol B engineering ticket immediately. Target LVC May 2027.</td></tr>
+      <tr><td>Data provider access confirmed (OBS or DSG or AC official)</td><td>Start parser design and ingestion mapping with Tal</td></tr>
+      <tr><td>Client requests real-time highlights during race</td><td>This is a hard requirement for Sol B &mdash; accelerate timeline</td></tr>
+      <tr><td>Dakar 2026 YOG confirms sailing data feed</td><td>Use Dakar build to also cover America's Cup (shared infra)</td></tr>
+    </table>
+  </div>
+
+  <div class="card sailing">
+    <h3>&#9996;&#65039; Immediate Next Steps (This Week)</h3>
+    <ol>
+      <li>&#127894;&#65039; <strong>SMT</strong>: Add Tack, Gybe, Penalty/Spin, Lead Change, Foiling Moment, OCS actions in SMT today. No approval needed.</li>
+      <li>&#127894;&#65039; <strong>Buster</strong>: Add Race Stories + Team Stories containers in Buster. Target: done this week.</li>
+      <li>&#128172; <strong>Tal Kalderon</strong>: Check OBS_Sailing IngestionManager scope. Can it connect to America's Cup data? Is it Olympics-only?</li>
+      <li>&#128222; <strong>DSG Discovery</strong>: Contact DataSportsGroup &mdash; does their Sailing API cover America's Cup 38 events?</li>
+      <li>&#128101; <strong>Dakar alignment</strong>: Connect with Dan Dragucki on PRO-1346 &mdash; Sailing enhancements for Dakar benefit from this work.</li>
+      <li>&#128196; <strong>Tagging guide</strong>: Update ops tagging guide with new actions before Regatta 1 (deadline: May 7, 2026).</li>
+      <li>&#128202; <strong>Client check</strong>: Ask AM/DM: is there a signed or near-signed client deal for America's Cup content? This drives the Sol B decision.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Open Questions</h3>
+    <ul>
+      <li>&#10067; Is there an active client deal or LOI for America's Cup content? (AM/DM to confirm)</li>
+      <li>&#10067; Does OBS_Sailing cover America's Cup events or Olympics only? (Tal)</li>
+      <li>&#10067; Is DSG's sailing API real-time PBP or results-only? (need DSG call)</li>
+      <li>&#10067; Who is the PM owner of Yacht Sailing &mdash; Nizan Cohen or handoff to Manor? (confirm with Nizan)</li>
+      <li>&#10067; Are the Test systems (Youth, Women) planned to go Operational for the Women's/Youth cups? (confirm with AM)</li>
+      <li>&#10067; Does Preliminary Regatta 1 require operator support to be pre-booked now? (Ops lead)</li>
+    </ul>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('comparison')">&#8592; Comparison Table</a>
+    <a class="page-nav-btn" onclick="showPage('references')">Next: All Sources &#8594;</a>
+  </div>
+</div>
+
+<!-- PAGE: References -->
+<div class="page" id="references">
+  <div class="page-header">
+    <h2>&#128206; All Sources</h2>
+    <div class="tldr">TL;DR &mdash; 2 internal Jira tickets, 5 DB systems, SMT screenshot, 4 web sources, 2 image uploads (AC schedule + SMT containers).</div>
+    <p>All references used in this analysis</p>
+  </div>
+
+  <div class="card">
+    <h3>Internal WSC Sources</h3>
+    <table>
+      <tr><th>Source</th><th>Detail</th><th>Date</th></tr>
+      <tr><td><a class="jira-link" href="https://wsc-sports.atlassian.net/browse/DEV-270026" target="_blank">DEV-270026</a></td><td>Epic: Enable Sports to work with multiple sub-sports types - OneClick. Sailing listed as Olympic sport use case.</td><td>Mar 17, 2026</td></tr>
+      <tr><td><a class="jira-link" href="https://wsc-sports.atlassian.net/browse/PRO-1346" target="_blank">PRO-1346</a></td><td>Idea: Dakar Youth Summer Olympics 2026 &ndash; New scope (includes Sailing)</td><td>Mar 10, 2026</td></tr>
+      <tr><td>dbo.SystemTypes (Id=52)</td><td>YachtSailing, IsOperational=1, ResolverType=YachtSailing, PM=Nizan Cohen</td><td>DB query Mar 2026</td></tr>
+      <tr><td>dbo.Systems (5 records)</td><td>America's Cup Men (52379 Operational), Youth (52380 Test), Women (52381 Test), QA systems</td><td>DB query Mar 2026</td></tr>
+      <tr><td>SMT Containers Screenshot</td><td>6 containers visible: Race HL, Action Container, HadAnAction, Top X, All Made, Multiple Race HL. 5 actions confirmed.</td><td>Mar 2026</td></tr>
+      <tr><td>America's Cup Schedule Image</td><td>Full 2026-2027 event calendar: 7 events from May 2026 (Cagliari) to July 2027 (Naples)</td><td>Provided by user</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Sport Rules &amp; Governing Bodies</h3>
+    <table>
+      <tr><th>Source</th><th>URL</th></tr>
+      <tr><td>America's Cup Official Site</td><td><a href="https://www.americascup.com" target="_blank">americascup.com</a></td></tr>
+      <tr><td>America's Cup Advanced Dashboard</td><td><a href="https://www.americascup.com/advanced-dashboard" target="_blank">americascup.com/advanced-dashboard</a></td></tr>
+      <tr><td>SVG: America's Cup 37th Broadcast Production (4K, HDR, LiDAR)</td><td><a href="https://www.sportsvideo.org/2024/10/18/live-from-the-37th-americas-cup-production-team-embraces-4k-hdr-st-2110-in-land-sea-effort-second-to-none/" target="_blank">sportsvideo.org</a></td></tr>
+      <tr><td>LiveLine / SailGP Real-time Data Technology</td><td><a href="https://tmbroadcast.com/index.php/sea-screen-liveline-transforms-sailgp-real-time-data-graphics/" target="_blank">tmbroadcast.com</a></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Data Provider Documentation</h3>
+    <table>
+      <tr><th>Provider</th><th>URL</th><th>Notes</th></tr>
+      <tr><td>DataSportsGroup Sailing API</td><td><a href="https://datasportsgroup.com/coverage/sailing/" target="_blank">datasportsgroup.com/sailing</a></td><td>Covers Olympics, European Championships, World Sailing Grand Slam. AC coverage TBD.</td></tr>
+      <tr><td>DSG API Sailing Documentation</td><td><a href="https://dsg-api.com/doc/sailing/get_areas/823/" target="_blank">dsg-api.com/sailing</a></td><td>Public API docs</td></tr>
+      <tr><td>SailGP / Oracle Cloud Architecture</td><td><a href="https://docs.oracle.com/en/solutions/sailgp-on-oci/index.html" target="_blank">oracle.com/sailgp</a></td><td>15k-20k messages per 500ms, 30k data points per boat</td></tr>
+      <tr><td>WSC SMT Reference</td><td>Internal: SMT &rarr; YachtSailing (SystemTypeId 52)</td><td>Actions, Parameters, Containers</td></tr>
+    </table>
+  </div>
+
+  <div class="page-nav">
+    <a class="page-nav-btn" onclick="showPage('recommendation')">&#8592; Recommendation</a>
+    <a class="page-nav-btn disabled">Next &#8594;</a>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+  const pages = document.querySelectorAll('.page');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  function showPage(id) {
+    pages.forEach(p => p.classList.remove('active'));
+    navItems.forEach(n => n.classList.remove('active'));
+    const page = document.getElementById(id);
+    if (page) { page.classList.add('active'); page.scrollIntoView({behavior:'smooth', block:'start'}); window.scrollTo({top:0}); }
+    const nav = document.querySelector(`.nav-item[data-page="${id}"]`);
+    if (nav) nav.classList.add('active');
+  }
+
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const page = item.getAttribute('data-page');
+      if (page) showPage(page);
+    });
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    const active = document.querySelector('.page.active');
+    const allPages = [...pages];
+    const idx = allPages.indexOf(active);
+    if (e.key === 'ArrowRight' && idx < allPages.length - 1) showPage(allPages[idx+1].id);
+    if (e.key === 'ArrowLeft' && idx > 0) showPage(allPages[idx-1].id);
+  });
+</script>
+
+</body>
+</html>
