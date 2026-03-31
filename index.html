@@ -252,37 +252,14 @@
     </table>
     <p style="font-size:0.82rem;color:var(--gray);margin-top:0.5rem;">Even at full 4-person ops team, total campaign cost is ~$3.2K &mdash; still negligible vs. any deal value. Decision remains purely about content quality and client expectations.</p>
 
-    <h3 style="margin-top:1.5rem;">PM &amp; Developer QC Overhead</h3>
-    <p style="font-size:0.85rem;color:var(--gray);margin-bottom:0.75rem;">One-time setup + ongoing oversight costs for QC process management, separate from per-race ops.</p>
+    <h3 style="margin-top:1.5rem;">PM &amp; DV QC Time Estimate (days only)</h3>
     <table>
-      <tr><th>Role</th><th>Scope</th><th>Days</th><th>Rate/Day</th><th>Total Cost</th></tr>
-      <tr>
-        <td><strong>PM</strong></td>
-        <td>QC standards doc, tagging guide, ops training (1 day setup) + pre-regatta QC review ×6 events (0.5 day each)</td>
-        <td>~4 days</td>
-        <td class="money">$750</td>
-        <td class="money">$3,000</td>
-      </tr>
-      <tr>
-        <td><strong>Developer (DV)</strong></td>
-        <td>QC checklist tooling / review template (1.5 days) + QC process validation pre-launch (0.5 day)</td>
-        <td>~2 days</td>
-        <td class="money">$1,500</td>
-        <td class="money">$3,000</td>
-      </tr>
-      <tr class="money-row">
-        <td><strong>PM + DV QC Overhead</strong></td>
-        <td>&mdash;</td>
-        <td><strong>~6 days</strong></td>
-        <td>&mdash;</td>
-        <td class="money"><strong>~$6,000</strong></td>
-      </tr>
+      <tr><th>Role</th><th>Scope</th><th>Est. Days</th></tr>
+      <tr><td><strong>PM</strong></td><td>QC standards doc + tagging guide + ops training (1 day setup) + pre-regatta review ×6 events (0.5 day each)</td><td>~4 days</td></tr>
+      <tr><td><strong>DV</strong></td><td>QC checklist / review template setup + pre-launch process validation</td><td>~2 days</td></tr>
+      <tr class="money-row"><td><strong>Total</strong></td><td>&mdash;</td><td><strong>~6 days</strong></td></tr>
     </table>
 
-    <div class="highlight" style="margin-top:1rem;">
-      <strong>Full campaign cost (ops + PM + DV):</strong> $3,185 ops + $6,000 PM/DV overhead = <strong>~$9,200 total</strong><br>
-      <span style="font-size:0.82rem;color:var(--gray);">Dev rate based on $15K/sprint ÷ 10 days. PM rate based on internal allocation.</span>
-    </div>
   </div>
 
   <div class="page-nav">
@@ -864,7 +841,7 @@
         <li>Ready for Regatta 1 in May 2026 (only viable option)</li>
         <li>Zero engineering sprints in Phase 1</li>
         <li>Model enhancements benefit ALL sailing events (Dakar YOG, Olympics)</li>
-          <li>Low financial risk: ~$9.2K total cost (ops $3.2K + PM/DV QC overhead $6K across full campaign)</li>
+          <li>Low financial risk: ~$3.2K total ops cost (full 4-person team across 91 races) + ~6 days PM/DV QC setup</li>
         <li>Stories containers add client value immediately</li>
         <li>Allows data collection before committing to ingestion investment</li>
         <li>Preserves optionality &mdash; can upgrade to ingestion in Phase 3</li>
@@ -1107,7 +1084,7 @@
     <h3>Investment vs. Value Matrix</h3>
     <table>
       <tr><th>Solution</th><th>Engineering Investment</th><th>Time to Value</th><th>Value If No Deal</th><th>Value If Deal Signed</th></tr>
-      <tr><td><strong>A: Manual + Enhance</strong></td><td class="money">~$9.2K total (ops $3.2K + PM/DV $6K)</td><td>2-3 weeks</td><td>Low risk, manageable cost</td><td>Good content, 4-person ops team per race</td></tr>
+      <tr><td><strong>A: Manual + Enhance</strong></td><td class="money">$0 dev / ~$3.2K ops</td><td>2-3 weeks</td><td>Low risk, manageable cost</td><td>Good content, 4-person ops team per race</td></tr>
       <tr><td><strong>B: Ingest + Enhance</strong></td><td class="money">~$75-97K</td><td>3-4 months</td><td>Wasted investment</td><td>Excellent ROI, premium product</td></tr>
       <tr><td><strong>C: Status Quo</strong></td><td class="money">$0</td><td>Now</td><td>Minimal ops cost</td><td>Poor client satisfaction</td></tr>
     </table>
