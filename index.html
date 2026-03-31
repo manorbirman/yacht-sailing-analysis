@@ -91,7 +91,6 @@
       <a class="nav-item active" data-page="hero"><span class="nav-icon">&#127968;</span> Executive Summary</a>
       <a class="nav-item" data-page="context"><span class="nav-icon">&#128202;</span> Business Signals</a>
       <a class="nav-item" data-page="schedule"><span class="nav-icon">&#128197;</span> AC 2026/27 Schedule</a>
-      <a class="nav-item" data-page="jira"><span class="nav-icon">&#127915;</span> Jira Landscape</a>
     </div>
     <div class="nav-section">
       <div class="nav-section-title">Sport Analysis</div>
@@ -312,83 +311,10 @@
 
   <div class="page-nav">
     <a class="page-nav-btn" onclick="showPage('context')">&#8592; Business Signals</a>
-    <a class="page-nav-btn" onclick="showPage('jira')">Next: Jira Landscape &#8594;</a>
-  </div>
-</div>
-
-<!-- PAGE: Jira Landscape -->
-<div class="page" id="jira">
-  <div class="page-header">
-    <h2>&#127915; Jira Landscape</h2>
-    <div class="tldr">TL;DR &mdash; No dedicated Yacht Sailing epic. Sailing appears in two strategic initiatives: Olympic multi-sport-type epic (DEV-270026) and Dakar 2026 YOG discovery (PRO-1346). Both are in progress.</div>
-    <p>All Jira tickets found related to Sailing / Yacht Sailing</p>
-  </div>
-
-  <div class="card">
-    <h3>Key Tickets Found</h3>
-    <table>
-      <tr><th>Ticket</th><th>Summary</th><th>Type</th><th>Status</th><th>Assignee</th><th>Priority</th></tr>
-      <tr>
-        <td><a class="jira-link" href="https://wsc-sports.atlassian.net/browse/DEV-270026" target="_blank">DEV-270026</a></td>
-        <td>Enable Sports to work with multiple sub-sports types - OneClick</td>
-        <td>Epic</td>
-        <td><span class="badge badge-orange">Tech Review</span></td>
-        <td>Dan Dragucki</td>
-        <td>P0</td>
-      </tr>
-      <tr>
-        <td><a class="jira-link" href="https://wsc-sports.atlassian.net/browse/PRO-1346" target="_blank">PRO-1346</a></td>
-        <td>Dakar Youth Summer Olympics 2026 &ndash; New scope (sports TBD, includes Sailing)</td>
-        <td>Idea</td>
-        <td><span class="badge badge-orange">Unit Review</span></td>
-        <td>Dan Dragucki</td>
-        <td>&mdash;</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="card sailing">
-    <h3>What DEV-270026 Means for Sailing</h3>
-    <p>This P0 Epic explicitly lists <strong>Sailing</strong> as one of the Olympic sports requiring multi-sport-type support (OneVsMany / OneVsOne format). The DOD mentions:</p>
-    <ul>
-      <li>Cycling Track, Archery, <strong>Sailing</strong>, Short Track Speed Skating, Ski Disciplines as target sports</li>
-      <li>First release is Golf only (Ryder Cup/Presidents Cup); Sailing is in follow-up scope</li>
-      <li>Documentation will cover how to onboard Sailing in follow-up work</li>
-    </ul>
-    <div class="highlight">
-      <strong>Implication:</strong> When DEV-270026 ships, Sailing will need to be configured as a multi-competition sport (OneVsMany / multiple teams in a race). This is architecturally significant &mdash; today America's Cup races are modeled as Team A vs Team B, but sailing often involves multiple boats/teams in one race.
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>What PRO-1346 Means for Sailing</h3>
-    <p>Dakar 2026 YOG (Oct-Nov 2026) includes Sailing among 25 competition sports. The discovery notes:</p>
-    <ul>
-      <li>Most sports are already supported, but some need sport model improvements</li>
-      <li>PBP for most sports would be entered manually</li>
-      <li>Need to test sports and understand expected PBP structure from the provider</li>
-    </ul>
-    <div class="highlight">
-      <strong>Implication:</strong> Sailing improvements for America's Cup (model enhancements, Stories) directly benefit the Dakar 2026 YOG scope, creating a <strong>1-to-N value multiplier</strong> on any investment made now.
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>Key Insight</h3>
-    <p>The Jira landscape tells us:</p>
-    <ol>
-      <li><strong>No dedicated Sailing epic</strong> &mdash; this analysis should become the basis for one</li>
-      <li><strong>Strategic alignment exists</strong> at the platform level (DEV-270026) and product discovery level (PRO-1346)</li>
-      <li><strong>Dan Dragucki is the key stakeholder</strong> on both tickets &mdash; align with him on timing</li>
-      <li><strong>No blocker tickets</strong> found &mdash; the path to enhancement is clear</li>
-    </ol>
-  </div>
-
-  <div class="page-nav">
-    <a class="page-nav-btn" onclick="showPage('schedule')">&#8592; Schedule</a>
     <a class="page-nav-btn" onclick="showPage('fundamentals')">Next: Sport Fundamentals &#8594;</a>
   </div>
 </div>
+
 
 <!-- PAGE: Sport Fundamentals -->
 <div class="page" id="fundamentals">
@@ -442,21 +368,22 @@
     <h3>Key Sailing Terms for WSC Operators</h3>
     <table>
       <tr><th>Term</th><th>Definition</th><th>Highlight Value</th></tr>
-      <tr><td><strong>Mark Rounding</strong></td><td>Boat rounds a mark (buoy) to change direction. Position at mark is a critical race moment.</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
-      <tr><td><strong>Tack</strong></td><td>Changing direction when sailing upwind. Boats zig-zag to beat upwind.</td><td>&#11088;&#11088;&#11088;</td></tr>
-      <tr><td><strong>Gybe</strong></td><td>Changing direction when sailing downwind. More dramatic/risky than tacking.</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
-      <tr><td><strong>Foiling</strong></td><td>Boat rises out of water on hydrofoils. AC75s foil at 40-50+ knots. Visually spectacular.</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td></tr>
-      <tr><td><strong>Touchdown</strong></td><td>Foiling boat's hull touches the water. Loss of foil = significant speed loss.</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
-      <tr><td><strong>Penalty / Spin</strong></td><td>Boat must do a 360&#176; turn penalty for infringement. Race-defining moment.</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td></tr>
-      <tr><td><strong>OCS</strong></td><td>On Course Side &mdash; false start. Boat must restart (huge momentum loss).</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
-      <tr><td><strong>VMG</strong></td><td>Velocity Made Good &mdash; the effective speed toward the mark. Key performance metric.</td><td>&#11088;&#11088;</td></tr>
-      <tr><td><strong>TWS / TWD</strong></td><td>True Wind Speed / Direction. Race context, affects strategy and highlights.</td><td>&#11088;</td></tr>
-      <tr><td><strong>Crossing</strong></td><td>Starboard-tack boat has right of way. A boat "crossing" ahead of opponent is a lead indicator.</td><td>&#11088;&#11088;&#11088;</td></tr>
+      <tr><td><strong>Mark Rounding</strong></td><td>Boat rounds a mark (buoy) to change direction. Position at mark is a critical race moment.</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td><strong>Tack</strong></td><td>Changing direction when sailing upwind. Boats zig-zag to beat upwind.</td><td><span class="badge badge-orange">Medium</span></td></tr>
+      <tr><td><strong>Gybe</strong></td><td>Changing direction when sailing downwind. More dramatic/risky than tacking.</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td><strong>Foiling</strong></td><td>Boat rises out of water on hydrofoils. AC75s foil at 40-50+ knots. Visually spectacular.</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td><strong>Touchdown</strong></td><td>Foiling boat's hull touches the water. Loss of foil = significant speed loss.</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td><strong>Penalty / Spin</strong></td><td>Boat must do a 360&#176; turn penalty for infringement. Race-defining moment.</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td><strong>OCS</strong></td><td>On Course Side &mdash; false start. Boat must restart (huge momentum loss).</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td><strong>Boat Speed (SOG)</strong></td><td>Speed Over Ground in knots. AC75s hit 50+ knots. Key performance metric and auto-tag trigger for foiling detection.</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td><strong>VMG</strong></td><td>Velocity Made Good &mdash; the effective speed toward the mark. Key performance metric.</td><td><span class="badge badge-gray">Low</span></td></tr>
+      <tr><td><strong>TWS / TWD</strong></td><td>True Wind Speed / Direction. Race context, affects strategy and highlights.</td><td><span class="badge badge-gray">Low</span></td></tr>
+      <tr><td><strong>Crossing</strong></td><td>Starboard-tack boat has right of way. A boat "crossing" ahead of opponent is a lead indicator.</td><td><span class="badge badge-orange">Medium</span></td></tr>
     </table>
   </div>
 
   <div class="page-nav">
-    <a class="page-nav-btn" onclick="showPage('jira')">&#8592; Jira Landscape</a>
+    <a class="page-nav-btn" onclick="showPage('schedule')">&#8592; Schedule</a>
     <a class="page-nav-btn" onclick="showPage('current-state')">Next: Current WSC State &#8594;</a>
   </div>
 </div>
@@ -571,17 +498,17 @@
     <h3>Recommended New Actions</h3>
     <table>
       <tr><th>Action</th><th>Description</th><th>Highlight Value</th><th>PBP-Detectable?</th><th>Priority</th></tr>
-      <tr><td><span class="action-new">Tack</span></td><td>Upwind direction change. Tactical duel element. Shows boat handling skills.</td><td>&#11088;&#11088;&#11088;</td><td>Partial (needs position data)</td><td><strong>P1</strong></td></tr>
-      <tr><td><span class="action-new">Gybe</span></td><td>Downwind direction change. More dramatic than tack, higher capsize risk.</td><td>&#11088;&#11088;&#11088;&#11088;</td><td>Partial (needs position data)</td><td><strong>P1</strong></td></tr>
-      <tr><td><span class="action-new">Penalty / Spin</span></td><td>720&#176; penalty turn (or 360&#176;) for rule infringement. Race-defining moment.</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>Yes (if OBS feed)</td><td><strong>P0</strong></td></tr>
-      <tr><td><span class="action-new">OCS / False Start</span></td><td>Boat crosses start line early. Must restart. Massive disadvantage.</td><td>&#11088;&#11088;&#11088;&#11088;</td><td>Yes (if OBS feed)</td><td><strong>P1</strong></td></tr>
-      <tr><td><span class="action-new">Lead Change</span></td><td>Boat overtakes competitor to take race lead. Most exciting moment in a race.</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>Derivable from position</td><td><strong>P0</strong></td></tr>
-      <tr><td><span class="action-new">Foiling Moment</span></td><td>Boat rises onto foils and achieves high-speed flight. Visually spectacular.</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>Yes (boat speed &gt; threshold)</td><td><strong>P0</strong></td></tr>
-      <tr><td><span class="action-new">Touchdown</span></td><td>Foiling boat's hull hits water. Loss of foil height. Momentum killer.</td><td>&#11088;&#11088;&#11088;&#11088;</td><td>Yes (telemetry)</td><td><strong>P1</strong></td></tr>
-      <tr><td><span class="action-new">Capsize / Incident</span></td><td>Boat capsizes or collides with mark/opponent. Rare but high-impact.</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>Manual only</td><td><strong>P1</strong></td></tr>
-      <tr><td><span class="action-new">Crossing</span></td><td>One boat crosses ahead of opponent on opposite tack. Tactical advantage signal.</td><td>&#11088;&#11088;&#11088;</td><td>Partial (position data)</td><td><strong>P2</strong></td></tr>
-      <tr><td><span class="action-new">Pre-start Maneuver</span></td><td>Boat positioning and tactics in the pre-start sequence. High drama for fans.</td><td>&#11088;&#11088;&#11088;</td><td>Manual only</td><td><strong>P2</strong></td></tr>
-      <tr><td><span class="action-new">Speed Record</span></td><td>Boat achieves peak speed in race (e.g., 54 knots). Broadcast stat highlight.</td><td>&#11088;&#11088;&#11088;&#11088;</td><td>Yes (telemetry)</td><td><strong>P2</strong></td></tr>
+      <tr><td><span class="action-new">Tack</span></td><td>Upwind direction change. Tactical duel element. Shows boat handling skills.</td><td><span class="badge badge-orange">Medium</span></td><td>Partial (needs position data)</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Gybe</span></td><td>Downwind direction change. More dramatic than tack, higher capsize risk.</td><td><span class="badge badge-green">High</span></td><td>Partial (needs position data)</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Penalty / Spin</span></td><td>720&#176; penalty turn (or 360&#176;) for rule infringement. Race-defining moment.</td><td><span class="badge badge-green">High</span></td><td>Yes (if OBS feed)</td><td><strong>P0</strong></td></tr>
+      <tr><td><span class="action-new">OCS / False Start</span></td><td>Boat crosses start line early. Must restart. Massive disadvantage.</td><td><span class="badge badge-green">High</span></td><td>Yes (if OBS feed)</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Lead Change</span></td><td>Boat overtakes competitor to take race lead. Most exciting moment in a race.</td><td><span class="badge badge-green">High</span></td><td>Derivable from position</td><td><strong>P0</strong></td></tr>
+      <tr><td><span class="action-new">Foiling Moment</span></td><td>Boat rises onto foils and achieves high-speed flight. Visually spectacular.</td><td><span class="badge badge-green">High</span></td><td>Yes (boat speed &gt; threshold)</td><td><strong>P0</strong></td></tr>
+      <tr><td><span class="action-new">Touchdown</span></td><td>Foiling boat's hull hits water. Loss of foil height. Momentum killer.</td><td><span class="badge badge-green">High</span></td><td>Yes (telemetry)</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Capsize / Incident</span></td><td>Boat capsizes or collides with mark/opponent. Rare but high-impact.</td><td><span class="badge badge-green">High</span></td><td>Manual only</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Crossing</span></td><td>One boat crosses ahead of opponent on opposite tack. Tactical advantage signal.</td><td><span class="badge badge-orange">Medium</span></td><td>Partial (position data)</td><td><strong>P2</strong></td></tr>
+      <tr><td><span class="action-new">Pre-start Maneuver</span></td><td>Boat positioning and tactics in the pre-start sequence. High drama for fans.</td><td><span class="badge badge-orange">Medium</span></td><td>Manual only</td><td><strong>P2</strong></td></tr>
+      <tr><td><span class="action-new">Speed Record</span></td><td>Boat achieves peak speed in race (e.g., 54 knots). Broadcast stat highlight.</td><td><span class="badge badge-green">High</span></td><td>Yes (telemetry)</td><td><strong>P2</strong></td></tr>
     </table>
   </div>
 
@@ -651,15 +578,15 @@
     <p>The official America's Cup operates an advanced live dashboard with real-time race data. This data infrastructure is unique in sailing:</p>
     <table>
       <tr><th>Data Field</th><th>Available?</th><th>Auto-tag Use Case</th><th>Feasibility</th></tr>
-      <tr><td>Boat position (GPS)</td><td>&#10004; Real-time</td><td>Mark roundings, lead changes, crossings</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td></tr>
-      <tr><td>SOG (Speed Over Ground)</td><td>&#10004; Real-time</td><td>Foiling detection, speed records</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td></tr>
-      <tr><td>VMG (Velocity Made Good)</td><td>&#10004; Real-time</td><td>Performance efficiency highlights</td><td>&#11088;&#11088;&#11088;</td></tr>
-      <tr><td>TWS / TWD (Wind speed/direction)</td><td>&#10004; Real-time (LiDAR)</td><td>Contextual highlight enrichment</td><td>&#11088;&#11088;</td></tr>
-      <tr><td>Tack / Gybe counts</td><td>&#10004; Post-race leg data</td><td>Tacking duel highlights</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
-      <tr><td>Penalty flags</td><td>&#10004; Umpire data</td><td>Penalty action auto-tag</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
-      <tr><td>Race position by leg</td><td>&#10004; At mark roundings</td><td>Position-based action enrichment</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td></tr>
-      <tr><td>Start line timing / OCS</td><td>&#10004; Transponder</td><td>OCS auto-detection</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
-      <tr><td>Foil height (telemetry)</td><td>&#10004; Boat sensors (100+)</td><td>Foiling status parameter</td><td>&#11088;&#11088;&#11088;&#11088;</td></tr>
+      <tr><td>Boat position (GPS)</td><td>&#10004; Real-time</td><td>Mark roundings, lead changes, crossings</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td>SOG (Speed Over Ground)</td><td>&#10004; Real-time</td><td>Foiling detection, speed records</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td>VMG (Velocity Made Good)</td><td>&#10004; Real-time</td><td>Performance efficiency highlights</td><td><span class="badge badge-orange">Medium</span></td></tr>
+      <tr><td>TWS / TWD (Wind speed/direction)</td><td>&#10004; Real-time (LiDAR)</td><td>Contextual highlight enrichment</td><td><span class="badge badge-gray">Low</span></td></tr>
+      <tr><td>Tack / Gybe counts</td><td>&#10004; Post-race leg data</td><td>Tacking duel highlights</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td>Penalty flags</td><td>&#10004; Umpire data</td><td>Penalty action auto-tag</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td>Race position by leg</td><td>&#10004; At mark roundings</td><td>Position-based action enrichment</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td>Start line timing / OCS</td><td>&#10004; Transponder</td><td>OCS auto-detection</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td>Foil height (telemetry)</td><td>&#10004; Boat sensors (100+)</td><td>Foiling status parameter</td><td><span class="badge badge-green">High</span></td></tr>
     </table>
     <p style="font-size:0.82rem;color:var(--gray);margin-top:0.5rem;">Source: Official America's Cup Advanced Dashboard, SailGP LiveLine architecture</p>
   </div>
@@ -687,14 +614,14 @@
     </div>
     <table>
       <tr><th>Action</th><th>Detection Source</th><th>Confidence</th></tr>
-      <tr><td>Foiling Moment</td><td>Boat speed &gt; 38 knots AND foil height sensor &gt; 0</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Very High</td></tr>
-      <tr><td>Lead Change</td><td>Position data: boat A was behind, now ahead at mark</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Very High</td></tr>
-      <tr><td>Penalty / Spin</td><td>Official umpire feed + heading change &gt; 360&#176; in short time</td><td>&#11088;&#11088;&#11088;&#11088; High</td></tr>
-      <tr><td>OCS / False Start</td><td>Transponder data: boat over line before start signal</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Very High</td></tr>
-      <tr><td>Mark Rounding</td><td>GPS proximity to mark coordinates</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Very High</td></tr>
-      <tr><td>Speed Record</td><td>Max SOG value in race telemetry</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Very High</td></tr>
-      <tr><td>Capsize</td><td>Inertial sensor anomaly (requires boat telemetry access)</td><td>&#11088;&#11088;&#11088; Medium (rare event)</td></tr>
-      <tr><td>Tack / Gybe</td><td>Heading change + wind angle crossing 0&#176; / 180&#176;</td><td>&#11088;&#11088;&#11088;&#11088; High (with telemetry)</td></tr>
+      <tr><td>Foiling Moment</td><td>Boat speed &gt; 38 knots AND foil height sensor &gt; 0</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td>Lead Change</td><td>Position data: boat A was behind, now ahead at mark</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td>Penalty / Spin</td><td>Official umpire feed + heading change &gt; 360&#176; in short time</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td>OCS / False Start</td><td>Transponder data: boat over line before start signal</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td>Mark Rounding</td><td>GPS proximity to mark coordinates</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td>Speed Record</td><td>Max SOG value in race telemetry</td><td><span class="badge badge-green">High</span></td></tr>
+      <tr><td>Capsize</td><td>Inertial sensor anomaly (requires boat telemetry access)</td><td><span class="badge badge-orange">Medium</span></td></tr>
+      <tr><td>Tack / Gybe</td><td>Heading change + wind angle crossing 0&#176; / 180&#176;</td><td><span class="badge badge-green">High</span></td></tr>
     </table>
   </div>
 
@@ -923,12 +850,12 @@
     <h3>Why America's Cup is Unique for WSC</h3>
     <table>
       <tr><th>Dimension</th><th>America's Cup</th><th>Other Sailing</th></tr>
-      <tr><td>Event prestige</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Oldest international sporting trophy (1851)</td><td>&#11088;&#11088;&#11088; Varies</td></tr>
-      <tr><td>Broadcast quality</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; 4K, HDR, aerial, drone, chase boat</td><td>&#11088;&#11088;&#11088; Standard</td></tr>
-      <tr><td>Data richness</td><td>&#11088;&#11088;&#11088;&#11088;&#11088; Real-time telemetry, 100+ sensors per boat</td><td>&#11088;&#11088; GPS only</td></tr>
-      <tr><td>Commercial value</td><td>&#11088;&#11088;&#11088;&#11088; Premium rights holders, major sponsors</td><td>&#11088;&#11088;&#11088; Moderate</td></tr>
-      <tr><td>Content volume</td><td>&#11088;&#11088; Low (91 races over 14 months)</td><td>&#11088;&#11088;&#11088; Medium</td></tr>
-      <tr><td>Digital audience</td><td>&#11088;&#11088;&#11088;&#11088; 220 countries, streaming-first</td><td>&#11088;&#11088; Limited</td></tr>
+      <tr><td>Event prestige</td><td><span class="badge badge-green">High</span> Oldest international sporting trophy (1851)</td><td><span class="badge badge-orange">Medium</span> Varies</td></tr>
+      <tr><td>Broadcast quality</td><td><span class="badge badge-green">High</span> 4K, HDR, aerial, drone, chase boat</td><td><span class="badge badge-orange">Medium</span> Standard</td></tr>
+      <tr><td>Data richness</td><td><span class="badge badge-green">High</span> Real-time telemetry, 100+ sensors per boat</td><td><span class="badge badge-gray">Low</span> GPS only</td></tr>
+      <tr><td>Commercial value</td><td><span class="badge badge-green">High</span> Premium rights holders, major sponsors</td><td><span class="badge badge-orange">Medium</span> Moderate</td></tr>
+      <tr><td>Content volume</td><td><span class="badge badge-gray">Low</span> 91 races over 14 months</td><td><span class="badge badge-orange">Medium</span></td></tr>
+      <tr><td>Digital audience</td><td><span class="badge badge-green">High</span> 220 countries, streaming-first</td><td><span class="badge badge-gray">Low</span> Limited</td></tr>
     </table>
   </div>
 
