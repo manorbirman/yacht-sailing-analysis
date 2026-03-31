@@ -237,17 +237,20 @@
 
   <div class="card context">
     <h3>Revenue &amp; Cost Model</h3>
+    <div class="highlight" style="margin-bottom:0.75rem;">
+      <strong>Ops team per race:</strong> 1 Tagger (1.5 hrs) + 2 QC Reviewers (0.75 hrs each) + 1 Shift Manager (0.5 hrs) = <strong>3.5 staff-hours per race @ $10/hr = ~$35/race</strong>
+    </div>
     <table>
-      <tr><th>Event</th><th>Races (Est.)</th><th>Manual Hrs/Race</th><th>Cost/Race</th><th>Total Manual Cost</th></tr>
-      <tr><td>Preliminary Regatta 1 (May 2026)</td><td>~8 races</td><td>1.5 hrs</td><td class="money">$15</td><td class="money">$120</td></tr>
-      <tr><td>Preliminary Regatta 2 (Jul 2026)</td><td>~8 races</td><td>1.5 hrs</td><td class="money">$15</td><td class="money">$120</td></tr>
-      <tr><td>Preliminary Regatta 3 (Early 2027)</td><td>~8 races</td><td>1.5 hrs</td><td class="money">$15</td><td class="money">$120</td></tr>
-      <tr><td>Louis Vuitton Cup (May-Jun 2027)</td><td>~40 races</td><td>1.5 hrs</td><td class="money">$15</td><td class="money">$600</td></tr>
-      <tr><td>Youth + Women's AC (Jun-Jul 2027)</td><td>~20 races</td><td>1.5 hrs</td><td class="money">$15</td><td class="money">$300</td></tr>
-      <tr><td>38th America's Cup Match (Jul 2027)</td><td>~7 races</td><td>1.5 hrs</td><td class="money">$15</td><td class="money">$105</td></tr>
-      <tr class="money-row"><td><strong>TOTAL MANUAL (full campaign)</strong></td><td><strong>~91 races</strong></td><td>&mdash;</td><td>&mdash;</td><td class="money"><strong>~$1,365 total ops cost</strong></td></tr>
+      <tr><th>Event</th><th>Races (Est.)</th><th>Staff/Race</th><th>Staff-Hrs/Race</th><th>Cost/Race</th><th>Total Cost</th></tr>
+      <tr><td>Preliminary Regatta 1 (May 2026)</td><td>~8 races</td><td>1 tagger + 2 QC + 1 mgr</td><td>3.5 hrs</td><td class="money">$35</td><td class="money">$280</td></tr>
+      <tr><td>Preliminary Regatta 2 (Jul 2026)</td><td>~8 races</td><td>1 tagger + 2 QC + 1 mgr</td><td>3.5 hrs</td><td class="money">$35</td><td class="money">$280</td></tr>
+      <tr><td>Preliminary Regatta 3 (Early 2027)</td><td>~8 races</td><td>1 tagger + 2 QC + 1 mgr</td><td>3.5 hrs</td><td class="money">$35</td><td class="money">$280</td></tr>
+      <tr><td>Louis Vuitton Cup (May-Jun 2027)</td><td>~40 races</td><td>1 tagger + 2 QC + 1 mgr</td><td>3.5 hrs</td><td class="money">$35</td><td class="money">$1,400</td></tr>
+      <tr><td>Youth + Women's AC (Jun-Jul 2027)</td><td>~20 races</td><td>1 tagger + 2 QC + 1 mgr</td><td>3.5 hrs</td><td class="money">$35</td><td class="money">$700</td></tr>
+      <tr><td>38th America's Cup Match (Jul 2027)</td><td>~7 races</td><td>1 tagger + 2 QC + 1 mgr</td><td>3.5 hrs</td><td class="money">$35</td><td class="money">$245</td></tr>
+      <tr class="money-row"><td><strong>TOTAL MANUAL (full campaign)</strong></td><td><strong>~91 races</strong></td><td>&mdash;</td><td><strong>~319 staff-hrs</strong></td><td>&mdash;</td><td class="money"><strong>~$3,185 total ops cost</strong></td></tr>
     </table>
-    <p style="font-size:0.82rem;color:var(--gray);margin-top:0.5rem;">Manual cost is negligible versus any deal value. This removes cost from the build-vs-manual equation &mdash; the decision is purely about content quality and client expectations.</p>
+    <p style="font-size:0.82rem;color:var(--gray);margin-top:0.5rem;">Even at full 4-person ops team, total campaign cost is ~$3.2K &mdash; still negligible vs. any deal value. Decision remains purely about content quality and client expectations.</p>
   </div>
 
   <div class="page-nav">
@@ -792,7 +795,7 @@
         <h4>Phase 2: May&ndash;Dec 2026 (Manual)</h4>
         <ul>
           <li>Manual tagging for all 3 Preliminary Regattas</li>
-          <li>~1.5 hrs/race, ~$15/race, ~$360 total for 2026</li>
+          <li>~3.5 staff-hrs/race (1 tagger + 2 QC + 1 shift mgr), ~$35/race, ~$840 total for 2026 regattas</li>
           <li>Collect content quality feedback from client</li>
           <li>Identify which actions operators tag most</li>
           <li>Benchmark: are Stories generating client value?</li>
@@ -829,7 +832,7 @@
         <li>Ready for Regatta 1 in May 2026 (only viable option)</li>
         <li>Zero engineering sprints in Phase 1</li>
         <li>Model enhancements benefit ALL sailing events (Dakar YOG, Olympics)</li>
-        <li>Low financial risk: ~$1.4K total ops cost</li>
+          <li>Low financial risk: ~$3.2K total ops cost (full 4-person team across 91 races)</li>
         <li>Stories containers add client value immediately</li>
         <li>Allows data collection before committing to ingestion investment</li>
         <li>Preserves optionality &mdash; can upgrade to ingestion in Phase 3</li>
@@ -1002,7 +1005,7 @@
       <tr><td><strong>Shahar Cohen</strong> (Nov 2023)</td><td><span class="money">6 weeks neto</span> for a new sport. <span class="money">+2 weeks</span> for a new data connection format.</td><td>"Neto time, considering a developer working 100% of their time, which is usually not the case."</td></tr>
       <tr><td><strong>Dan Dragucki</strong> (Jan 2025)</td><td><span class="money">1.5&ndash;2 months</span> without ingestion. <span class="money">3 months</span> with ingestion.</td><td>FIS Skiing estimate &mdash; representative of medium-complexity new sport.</td></tr>
       <tr><td><strong>Shahar Cohen</strong> (May 2023)</td><td><span class="money">3&ndash;4 weeks including testing</span> for a sub-sport.</td><td>Badminton &amp; Table Tennis estimate.</td></tr>
-      <tr><td><strong>Manual clipping baseline</strong></td><td><span class="money">$10/hr</span> per operator. ~1.5 hrs per race.</td><td>Industry standard for WSC ops workers.</td></tr>
+      <tr><td><strong>Manual ops baseline</strong></td><td><span class="money">$10/hr</span> per person. 3.5 staff-hrs per race (1 tagger × 1.5h + 2 QC × 0.75h + 1 shift mgr × 0.5h). ~$35/race.</td><td>Industry standard for WSC ops workers. QC + shift manager required per race for quality assurance.</td></tr>
       <tr><td><strong>Sprint cost baseline</strong></td><td><span class="money">~$15K/sprint</span></td><td>Used to convert sprint estimates to dollar cost.</td></tr>
     </table>
   </div>
@@ -1072,7 +1075,7 @@
     <h3>Investment vs. Value Matrix</h3>
     <table>
       <tr><th>Solution</th><th>Engineering Investment</th><th>Time to Value</th><th>Value If No Deal</th><th>Value If Deal Signed</th></tr>
-      <tr><td><strong>A: Manual + Enhance</strong></td><td class="money">$0 dev</td><td>2-3 weeks</td><td>Low risk, some cost</td><td>Good content, some ops cost</td></tr>
+      <tr><td><strong>A: Manual + Enhance</strong></td><td class="money">$0 dev / ~$3.2K ops</td><td>2-3 weeks</td><td>Low risk, manageable cost</td><td>Good content, 4-person ops team per race</td></tr>
       <tr><td><strong>B: Ingest + Enhance</strong></td><td class="money">~$75-97K</td><td>3-4 months</td><td>Wasted investment</td><td>Excellent ROI, premium product</td></tr>
       <tr><td><strong>C: Status Quo</strong></td><td class="money">$0</td><td>Now</td><td>Minimal ops cost</td><td>Poor client satisfaction</td></tr>
     </table>
