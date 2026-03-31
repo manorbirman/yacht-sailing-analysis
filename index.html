@@ -490,42 +490,42 @@
 <div class="page" id="actions">
   <div class="page-header">
     <h2>&#127919; Actions &amp; Model Enhancements</h2>
-    <div class="teal-tldr">TL;DR &mdash; Add 10 new actions, 10 parameters. Priority actions: Tack, Gybe, Penalty/Spin, Lead Change, Foiling Moment. Can be done in SMT without code changes for most.</div>
+    <div class="teal-tldr">TL;DR &mdash; 11 suggested enrichment actions (P1&ndash;P3), 10 suggested parameters (P1&ndash;P3). Top enrichments: Penalty/Spin, Lead Change, Foiling Moment. Most can be added in SMT without code changes.</div>
     <p>Full recommended action and parameter additions for the Yacht Sailing sport model</p>
   </div>
 
   <div class="card sailing">
-    <h3>Recommended New Actions</h3>
+    <h3>Suggested Enrichment &mdash; Actions</h3>
     <table>
       <tr><th>Action</th><th>Description</th><th>Highlight Value</th><th>PBP-Detectable?</th><th>Priority</th></tr>
-      <tr><td><span class="action-new">Tack</span></td><td>Upwind direction change. Tactical duel element. Shows boat handling skills.</td><td><span class="badge badge-orange">Medium</span></td><td>Partial (needs position data)</td><td><strong>P1</strong></td></tr>
-      <tr><td><span class="action-new">Gybe</span></td><td>Downwind direction change. More dramatic than tack, higher capsize risk.</td><td><span class="badge badge-green">High</span></td><td>Partial (needs position data)</td><td><strong>P1</strong></td></tr>
-      <tr><td><span class="action-new">Penalty / Spin</span></td><td>720&#176; penalty turn (or 360&#176;) for rule infringement. Race-defining moment.</td><td><span class="badge badge-green">High</span></td><td>Yes (if OBS feed)</td><td><strong>P0</strong></td></tr>
-      <tr><td><span class="action-new">OCS / False Start</span></td><td>Boat crosses start line early. Must restart. Massive disadvantage.</td><td><span class="badge badge-green">High</span></td><td>Yes (if OBS feed)</td><td><strong>P1</strong></td></tr>
-      <tr><td><span class="action-new">Lead Change</span></td><td>Boat overtakes competitor to take race lead. Most exciting moment in a race.</td><td><span class="badge badge-green">High</span></td><td>Derivable from position</td><td><strong>P0</strong></td></tr>
-      <tr><td><span class="action-new">Foiling Moment</span></td><td>Boat rises onto foils and achieves high-speed flight. Visually spectacular.</td><td><span class="badge badge-green">High</span></td><td>Yes (boat speed &gt; threshold)</td><td><strong>P0</strong></td></tr>
-      <tr><td><span class="action-new">Touchdown</span></td><td>Foiling boat's hull hits water. Loss of foil height. Momentum killer.</td><td><span class="badge badge-green">High</span></td><td>Yes (telemetry)</td><td><strong>P1</strong></td></tr>
-      <tr><td><span class="action-new">Capsize / Incident</span></td><td>Boat capsizes or collides with mark/opponent. Rare but high-impact.</td><td><span class="badge badge-green">High</span></td><td>Manual only</td><td><strong>P1</strong></td></tr>
-      <tr><td><span class="action-new">Crossing</span></td><td>One boat crosses ahead of opponent on opposite tack. Tactical advantage signal.</td><td><span class="badge badge-orange">Medium</span></td><td>Partial (position data)</td><td><strong>P2</strong></td></tr>
-      <tr><td><span class="action-new">Pre-start Maneuver</span></td><td>Boat positioning and tactics in the pre-start sequence. High drama for fans.</td><td><span class="badge badge-orange">Medium</span></td><td>Manual only</td><td><strong>P2</strong></td></tr>
-      <tr><td><span class="action-new">Speed Record</span></td><td>Boat achieves peak speed in race (e.g., 54 knots). Broadcast stat highlight.</td><td><span class="badge badge-green">High</span></td><td>Yes (telemetry)</td><td><strong>P2</strong></td></tr>
+      <tr><td><span class="action-new">Penalty / Spin</span></td><td>720&#176; penalty turn (or 360&#176;) for rule infringement. Race-defining moment.</td><td><span class="badge badge-green">High</span></td><td>Yes (if OBS feed)</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Lead Change</span></td><td>Boat overtakes competitor to take race lead. Most exciting moment in a race.</td><td><span class="badge badge-green">High</span></td><td>Derivable from position</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Foiling Moment</span></td><td>Boat rises onto foils and achieves high-speed flight. Visually spectacular.</td><td><span class="badge badge-green">High</span></td><td>Yes (boat speed &gt; threshold)</td><td><strong>P1</strong></td></tr>
+      <tr><td><span class="action-new">Gybe</span></td><td>Downwind direction change. More dramatic than tack, higher capsize risk.</td><td><span class="badge badge-green">High</span></td><td>Partial (needs position data)</td><td><strong>P2</strong></td></tr>
+      <tr><td><span class="action-new">OCS / False Start</span></td><td>Boat crosses start line early. Must restart. Massive disadvantage.</td><td><span class="badge badge-green">High</span></td><td>Yes (if OBS feed)</td><td><strong>P2</strong></td></tr>
+      <tr><td><span class="action-new">Tack</span></td><td>Upwind direction change. Tactical duel element. Shows boat handling skills.</td><td><span class="badge badge-orange">Medium</span></td><td>Partial (needs position data)</td><td><strong>P2</strong></td></tr>
+      <tr><td><span class="action-new">Touchdown</span></td><td>Foiling boat's hull hits water. Loss of foil height. Momentum killer.</td><td><span class="badge badge-green">High</span></td><td>Yes (telemetry)</td><td><strong>P2</strong></td></tr>
+      <tr><td><span class="action-new">Capsize / Incident</span></td><td>Boat capsizes or collides with mark/opponent. Rare but high-impact.</td><td><span class="badge badge-green">High</span></td><td>Manual only</td><td><strong>P2</strong></td></tr>
+      <tr><td><span class="action-new">Speed Record</span></td><td>Boat achieves peak speed in race (e.g., 54 knots). Broadcast stat highlight.</td><td><span class="badge badge-green">High</span></td><td>Yes (telemetry)</td><td><strong>P3</strong></td></tr>
+      <tr><td><span class="action-new">Crossing</span></td><td>One boat crosses ahead of opponent on opposite tack. Tactical advantage signal.</td><td><span class="badge badge-orange">Medium</span></td><td>Partial (position data)</td><td><strong>P3</strong></td></tr>
+      <tr><td><span class="action-new">Pre-start Maneuver</span></td><td>Boat positioning and tactics in the pre-start sequence. High drama for fans.</td><td><span class="badge badge-orange">Medium</span></td><td>Manual only</td><td><strong>P3</strong></td></tr>
     </table>
   </div>
 
   <div class="card sailing">
-    <h3>Recommended New Parameters (per existing + new actions)</h3>
+    <h3>Suggested Enrichment &mdash; Parameters</h3>
     <table>
       <tr><th>Parameter</th><th>Type</th><th>Values</th><th>Action(s)</th><th>Priority</th></tr>
-      <tr><td><strong>Leg Number</strong></td><td>Enumeration</td><td>Leg 1, Leg 2, Leg 3, Leg 4, Leg 5, Leg 6</td><td>All actions</td><td><strong>P0</strong></td></tr>
-      <tr><td><strong>Race Position</strong></td><td>Enumeration</td><td>1st, 2nd, 3rd, 4th, 5th</td><td>Mark Rounding, Lead Change, Finish</td><td><strong>P0</strong></td></tr>
-      <tr><td><strong>Foiling Status</strong></td><td>Boolean</td><td>Foiling / Not Foiling</td><td>Mark Rounding, Tack, Gybe, Start</td><td><strong>P1</strong></td></tr>
-      <tr><td><strong>Penalty Type</strong></td><td>Enumeration</td><td>360 Spin, 720 Spin, DSQ, Redress, OCS</td><td>Penalty / Spin</td><td><strong>P0</strong></td></tr>
-      <tr><td><strong>Boat Speed (knots)</strong></td><td>Numeric</td><td>0-70 knots</td><td>Lead Change, Foiling Moment, Mark Rounding</td><td><strong>P1</strong></td></tr>
-      <tr><td><strong>Lead (time/distance)</strong></td><td>Enumeration</td><td>Close (&lt;5s), Medium (5-15s), Large (&gt;15s)</td><td>Mark Rounding, Lead Change</td><td><strong>P1</strong></td></tr>
-      <tr><td><strong>Mark Type</strong></td><td>Enumeration</td><td>Windward Mark, Leeward Mark, Gate, Start Line, Finish Line</td><td>Mark Rounding, Start, Finish</td><td><strong>P1</strong></td></tr>
-      <tr><td><strong>Wind Condition</strong></td><td>Enumeration</td><td>Light (&lt;10kn), Medium (10-18kn), Heavy (&gt;18kn)</td><td>Start, Race-level context</td><td><strong>P2</strong></td></tr>
-      <tr><td><strong>Incident Type</strong></td><td>Enumeration</td><td>Capsize, Mark Hit, Collision, Gear Failure, Retirement</td><td>Capsize / Incident</td><td><strong>P1</strong></td></tr>
-      <tr><td><strong>Direction</strong></td><td>Enumeration</td><td>Port, Starboard</td><td>Tack, Gybe</td><td><strong>P2</strong></td></tr>
+      <tr><td><strong>Leg Number</strong></td><td>Enumeration</td><td>Leg 1, Leg 2, Leg 3, Leg 4, Leg 5, Leg 6</td><td>All actions</td><td><strong>P1</strong></td></tr>
+      <tr><td><strong>Race Position</strong></td><td>Enumeration</td><td>1st, 2nd, 3rd, 4th, 5th</td><td>Mark Rounding, Lead Change, Finish</td><td><strong>P1</strong></td></tr>
+      <tr><td><strong>Penalty Type</strong></td><td>Enumeration</td><td>360 Spin, 720 Spin, DSQ, Redress, OCS</td><td>Penalty / Spin</td><td><strong>P1</strong></td></tr>
+      <tr><td><strong>Foiling Status</strong></td><td>Boolean</td><td>Foiling / Not Foiling</td><td>Mark Rounding, Tack, Gybe, Start</td><td><strong>P2</strong></td></tr>
+      <tr><td><strong>Boat Speed (knots)</strong></td><td>Numeric</td><td>0-70 knots</td><td>Lead Change, Foiling Moment, Mark Rounding</td><td><strong>P2</strong></td></tr>
+      <tr><td><strong>Lead (time/distance)</strong></td><td>Enumeration</td><td>Close (&lt;5s), Medium (5-15s), Large (&gt;15s)</td><td>Mark Rounding, Lead Change</td><td><strong>P2</strong></td></tr>
+      <tr><td><strong>Mark Type</strong></td><td>Enumeration</td><td>Windward Mark, Leeward Mark, Gate, Start Line, Finish Line</td><td>Mark Rounding, Start, Finish</td><td><strong>P2</strong></td></tr>
+      <tr><td><strong>Incident Type</strong></td><td>Enumeration</td><td>Capsize, Mark Hit, Collision, Gear Failure, Retirement</td><td>Capsize / Incident</td><td><strong>P2</strong></td></tr>
+      <tr><td><strong>Wind Condition</strong></td><td>Enumeration</td><td>Light (&lt;10kn), Medium (10-18kn), Heavy (&gt;18kn)</td><td>Start, Race-level context</td><td><strong>P3</strong></td></tr>
+      <tr><td><strong>Direction</strong></td><td>Enumeration</td><td>Port, Starboard</td><td>Tack, Gybe</td><td><strong>P3</strong></td></tr>
     </table>
   </div>
 
@@ -665,12 +665,12 @@
     <h3>Stories Container Plan</h3>
     <table>
       <tr><th>Container</th><th>Content Idea</th><th>Actions Required</th><th>Priority</th><th>Buster or Code?</th></tr>
-      <tr><td><strong>Race Stories</strong></td><td>"Race 3 Recap" &mdash; key moments from a single race as a story carousel</td><td>All 5 current + 10 new</td><td><strong>P0</strong></td><td>Buster (no code)</td></tr>
-      <tr><td><strong>Team Stories</strong></td><td>"Emirates Team NZ &mdash; Race Day 1" &mdash; all moments for one team</td><td>Mark Rounding + Lead Change + Finish</td><td><strong>P0</strong></td><td>Buster (no code)</td></tr>
-      <tr><td><strong>Action Stories (Speed)</strong></td><td>"Top 5 Speeds of the Day" &mdash; boat speed records across all races</td><td>Speed Record (new), Foiling Moment (new)</td><td><strong>P1</strong></td><td>Buster + new actions</td></tr>
-      <tr><td><strong>Action Stories (Penalty)</strong></td><td>"All Penalties Today" &mdash; every spin/infringement across the regatta</td><td>Penalty / Spin (new)</td><td><strong>P1</strong></td><td>Buster + new actions</td></tr>
-      <tr><td><strong>Player Stories</strong></td><td>Sailor spotlight &mdash; if player-level attribution exists</td><td>All actions with player attribution</td><td><strong>P2</strong></td><td>Buster (no code)</td></tr>
-      <tr><td><strong>Action Stories (Lead Changes)</strong></td><td>"All Lead Changes" &mdash; every overtake in the regatta</td><td>Lead Change (new)</td><td><strong>P1</strong></td><td>Buster + new action</td></tr>
+      <tr><td><strong>Race Stories</strong></td><td>"Race 3 Recap" &mdash; key moments from a single race as a story carousel</td><td>All 5 current + 10 new</td><td><strong>P1</strong></td><td>Buster (no code)</td></tr>
+      <tr><td><strong>Team Stories</strong></td><td>"Emirates Team NZ &mdash; Race Day 1" &mdash; all moments for one team</td><td>Mark Rounding + Lead Change + Finish</td><td><strong>P1</strong></td><td>Buster (no code)</td></tr>
+      <tr><td><strong>Action Stories (Speed)</strong></td><td>"Top 5 Speeds of the Day" &mdash; boat speed records across all races</td><td>Speed Record (new), Foiling Moment (new)</td><td><strong>P2</strong></td><td>Buster + new actions</td></tr>
+      <tr><td><strong>Action Stories (Penalty)</strong></td><td>"All Penalties Today" &mdash; every spin/infringement across the regatta</td><td>Penalty / Spin (new)</td><td><strong>P2</strong></td><td>Buster + new actions</td></tr>
+      <tr><td><strong>Action Stories (Lead Changes)</strong></td><td>"All Lead Changes" &mdash; every overtake in the regatta</td><td>Lead Change (new)</td><td><strong>P2</strong></td><td>Buster + new action</td></tr>
+      <tr><td><strong>Player Stories</strong></td><td>Sailor spotlight &mdash; if player-level attribution exists</td><td>All actions with player attribution</td><td><strong>P3</strong></td><td>Buster (no code)</td></tr>
     </table>
   </div>
 
